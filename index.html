@@ -7,7 +7,7 @@
 </head>
 <body>
 <script>
-    $('head').append('<link rel="stylesheet" type="text/css" href="css/jekyllthemes.min.css">');
+    $('head').append('<link rel="stylesheet" type="text/css" href="css/purple.css">');
     const root_url = "https://api.github.com/repos/";
     const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/transport_challenge", "alters-mit/multimodal_challenge"];
     let repo_names = [];
@@ -15,6 +15,13 @@
         repo_names[i] = /\/(.*)/.exec(repos[i])[1];
     }
     const pypi = ["tdw", "magnebot", null, null, null];
+
+    let sidebar = '<div class="sidenav" style="width:100%;right:0" id="toc">\n';
+    repo_names.forEach(function(repo) {
+        sidebar += '<a href="#' + repo + '">' + repo + '</a>\n';
+    });
+    sidebar += "</div>";
+    $("body").append(sidebar);
 
     // Get the name of the repo and the latest release.
     repos.forEach(function(repo, i) {
@@ -24,15 +31,14 @@
             main_branch = "master";
         }
 
+        let repo_div = '<div id="' + repo_names[i] + '">\n';
         // Get the description and latest release.
         $.ajax({
            async: false,
            type: 'GET',
            url: repo_url,
             success: function(resp){
-               let header = "<h1><a href=\"" + resp.url + "\">" + resp.name + "</a></h1>";
-               let description = resp.description;
-               $("body").append(header).append(description);
+               repo_div += "<h2><a href=\"" + resp.url + "\">" + resp.name + "</a></h2>\n\n<p>" + resp.description + "</p>\n\n";
             }
         });
         $.ajax({
@@ -40,15 +46,14 @@
             type: 'GET',
             url: repo_url + "/tags",
             success: function(resp){
-                let release = "<h3>Latest: <a href=\"https://github.com/" + repo + "/releases/tag/" + resp[0].name + "\">" + resp[0].name + "</h3></a>";
-                $("body").append(release);
+                repo_div += "<h4>Latest: <a href=\"https://github.com/" + repo + "/releases/tag/" + resp[0].name + "\">" + resp[0].name + "</h4></a>";
             }
         });
 
         // Get install and update instructions.
         let install = "<h4><img src='images/desktop-download-16.svg' alt='install'> Install:</h4>\n\n<ul>\n";
         let update = "<h4><img src='images/repo-pull-16.svg' alt='update'> Update:</h4>\n\n<ul>\n";
-        let git_pull = "<code>cd path to " + repo_names[i] + "</code> and <code>git pull</code>";
+        let git_pull = "<code>cd path/to/" + repo_names[i] + "</code> and <code>git pull</code>";
         let clone_repo = "";
         if (repo === "threedworld-mit/tdw"){
             clone_repo = "Clone the repo, <code>cd path/to/" + repo_names[i] + "/Python</code> and <code>pip3 install -e .</code>";
@@ -93,8 +98,7 @@
         });
         install += "</ul>\n\n";
         update += "</ul>\n\n";
-        document.body.innerHTML += install;
-        document.body.innerHTML += update;
+        repo_div += install + update;
 
         // Get issues and pull requests.
         $.ajax({
@@ -105,7 +109,7 @@
               state: "open"
             },
             success: function(resp){
-                let issues = "<h3><img src=\"images/issue-opened-16.svg\" alt='issues'> Issues:</h3>";
+                let issues = "<h4><img src=\"images/issue-opened-16.svg\" alt='issues'> Issues:</h4>";
                 issues += "<ul>";
                 $.each(resp, function (i, issue) {
                     if (!issue.hasOwnProperty("pull_request")){
@@ -113,7 +117,7 @@
                     }
                 });
                 issues += "</ul>";
-                $("body").append(issues);
+                repo_div += issues;
             }
         });
         $.ajax({
@@ -124,15 +128,17 @@
               state: "open"
             },
             success: function(resp){
-                let issues = "<h3><img src=\"images/git-pull-request-16.svg\" alt='pull requests'> Pull Requests:</h3>";
+                let issues = "<h4><img src=\"images/git-pull-request-16.svg\" alt='pull requests'> Pull Requests:</h4>";
                 issues += "<ul>";
                 $.each(resp, function (i, issue) {
                     issues += ('<li><a href="' + issue.html_url + '">' + issue.number + ": " + issue.title + '</a></li>');
                 });
                 issues += "</ul>";
-                $("body").append(issues);
+                repo_div += issues;
             }
         });
+        repo_div += "</div>\n\n";
+        $("body").append(repo_div);
     });
 </script>
 </body>

@@ -1,0 +1,250 @@
+:root {
+  --title-color: #8064a9;
+  --text-color: #444444;
+  --light-text-color: #666666;
+  --link-color: #2aa899;
+  --code-color: #745fb5;
+
+  --shadow-color: rgba(116, 95, 181, 0.1);
+  --purple-light: rgba(116, 95, 181, 0.3);
+  --border: #eee;
+  --shadow: 0rem 0.2rem 0.4rem var(--shadow-color);
+
+  --side-bar-bg-color: #fafafa;
+  --control-text-color: var(var(--light-text-color));
+  --active-file-text-color: var(--title-color);
+  --active-file-bg-color: var(--shadow-color);
+  --item-hover-bg-color: var(--shadow-color);
+  --active-file-border-color: var(var(--title-color));
+
+  --base-font: "Helvetica Neue", "Noto Sans", -apple-system, Ubuntu,
+    "Microsoft YaHei", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans",
+    "Noto Sans CJK SC", "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC",
+    "Source Han Sans CN", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti",
+    SimHei, "WenQuanYi Zen Hei Sharp", "Source Sans Pro", sans-serif;
+
+  --monospace: "JetBrains Mono", "Fira Code", "Cascadia Code", "Sarasa Term SC",
+    Monaco, "Deja Vu Sans Mono", Consolas, "Lucida Console", "Andale Mono",
+    "Roboto Mono", Courier, Monospace !important;
+}
+
+/* 打印 */
+@media print {
+  html {
+    font-size: 0.9rem;
+  }
+
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+
+  pre {
+    word-wrap: break-word;
+  }
+  #write {
+    max-width: 100%;
+  }
+  @page {
+    size: A4; /* PDF A4 */
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+html {
+  font-size: 16px;
+  margin-left: 200px;
+  margin-top: 2%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: initial;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6rem;
+  letter-spacing: 0;
+  overflow-x: hidden;
+}
+
+
+body > *:first-child {
+  margin-top: 0 !important;
+}
+
+body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+#write a {
+  border-bottom: none;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  line-height: 1.3;
+  cursor: text;
+  color: var(--title-color);
+  font-family: var(--title-font);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.25em;
+  margin-bottom: 2rem;
+}
+h1:after {
+  content: "";
+  display: block;
+  margin: 0.2em auto 0;
+  width: 6rem;
+  height: 2px;
+  border-bottom: 2px solid var(--title-color);
+}
+
+h2 {
+  padding-left: 0.4em;
+  font-size: 1.75em;
+  border-left: 0.4em solid var(--title-color);
+  border-bottom: 1px solid var(--title-color);
+}
+h3 {
+  font-size: 1.5em;
+}
+h4 {
+  font-size: 1.3em;
+}
+h5 {
+  font-size: 1.2em;
+}
+h6 {
+  font-size: 1.1em;
+}
+
+p,
+blockquote,
+ul,
+ol,
+dl,
+table {
+  margin: 0.8em 0;
+}
+
+/* horizontal rule */
+hr {
+  margin: 1em auto;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+/* 列表 */
+li > ol,
+li > ul {
+  margin: 0 0;
+}
+
+li p.first {
+  display: inline-block;
+}
+
+ul,
+ol {
+  padding-left: 2rem;
+}
+
+ul:first-child,
+ol:first-child {
+  margin-top: 0;
+}
+
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}
+
+#write ol li,
+ul li {
+  padding-left: 0.1rem;
+}
+
+/* 引用 */
+blockquote {
+  border-left: 0.2em solid var(--purple-light);
+  padding-left: 1em;
+  color: var(--light-text-color);
+  font-family: var(--base-font);
+}
+
+/* 表格 */
+table {
+  margin-bottom: 1.25rem;
+}
+table th,
+table td {
+  padding: 8px;
+  line-height: 1.25rem;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+}
+table th {
+  font-weight: bold;
+}
+table thead th {
+  vertical-align: middle;
+}
+table tr:nth-child(2n),
+thead {
+  background-color: #fcfcfc;
+}
+
+
+/* 代码段 背景 */
+pre {
+  --select-text-bg-color: #ebe1f5;
+}
+
+
+
+
+.sidenav {
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 2%;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #2aa899;
+  display: block;
+}
+
+
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
