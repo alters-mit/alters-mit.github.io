@@ -42,14 +42,6 @@
   pre {
     word-wrap: break-word;
   }
-  #write {
-    max-width: 100%;
-  }
-  @page {
-    size: A4; /* PDF A4 */
-    margin-left: 0;
-    margin-right: 0;
-  }
 }
 
 html {
@@ -68,24 +60,11 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.6rem;
   letter-spacing: 0;
-  overflow-x: hidden;
-}
-
-
-body > *:first-child {
-  margin-top: 0 !important;
-}
-
-body > *:last-child {
-  margin-bottom: 0 !important;
 }
 
 a {
   color: var(--link-color);
   text-decoration: none;
-}
-#write a {
-  border-bottom: none;
 }
 
 
@@ -225,13 +204,15 @@ pre {
 
 .sidenav {
   width: 160px; /* Set the width of the sidebar */
+  height: 100%;
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
+  z-index: 0; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 2%;
+  padding-right: 2%;
 }
+
 
 /* The navigation menu links */
 .sidenav a {

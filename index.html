@@ -8,48 +8,31 @@
 <body>
 <script>
     $('head').append('<link rel="stylesheet" type="text/css" href="css/purple.css">');
-    const root_url = "https://api.github.com/repos/";
     const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/transport_challenge", "alters-mit/multimodal_challenge"];
     let repo_names = [];
     for (i = 0; i < repos.length; i++) {
         repo_names[i] = /\/(.*)/.exec(repos[i])[1];
     }
     const pypi = ["tdw", "magnebot", null, null, null];
-
-    let sidebar = '<div class="sidenav" style="width:100%;right:0" id="toc">\n';
-    repo_names.forEach(function(repo) {
-        sidebar += '<a href="#' + repo + '">' + repo + '</a>\n';
-    });
-    sidebar += "</div>";
-    $("body").append(sidebar);
+    const descriptions = ["ThreeDWorld simulation environment",
+        "High-level API for the TDW Magnebot",
+        "Generic structures to create TDW physics datasets",
+        "Extension of the Magnebot API for the Transport Challenge",
+        "Multi-modal challenge for the Magnebot API"];
 
     // Get the name of the repo and the latest release.
     repos.forEach(function(repo, i) {
-        let repo_url = root_url + repo;
         let main_branch = "main";
         if (repo_names[i] === "tdw" || repo_names[i] === "tdw_physics"){
             main_branch = "master";
         }
-
-        let repo_div = '<div id="' + repo_names[i] + '">\n';
-        // Get the description and latest release.
-        $.ajax({
-           async: false,
-           type: 'GET',
-           url: repo_url,
-            success: function(resp){
-               repo_div += "<h2><a href=\"" + resp.url + "\">" + resp.name + "</a></h2>\n\n<p>" + resp.description + "</p>\n\n";
-            }
-        });
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: repo_url + "/tags",
-            success: function(resp){
-                repo_div += "<h4>Latest: <a href=\"https://github.com/" + repo + "/releases/tag/" + resp[0].name + "\">" + resp[0].name + "</h4></a>";
-            }
-        });
-
+        // Get the TDW-related requirements.
+        let setup_url = "https://raw.githubusercontent.com/" + repo + "/" + main_branch + "/setup.py";
+        let version = "";
+        let latest_release_url = "https://github.com/" + repo + "/releases/latest";
+        if (repo_names[i] === "tdw"){
+            setup_url = "https://raw.githubusercontent.com/threedworld-mit/tdw/master/Python/setup.py";
+        }
         // Get install and update instructions.
         let install = "<h4><img src='images/desktop-download-16.svg' alt='install'> Install:</h4>\n\n<ul>\n";
         let update = "<h4><img src='images/repo-pull-16.svg' alt='update'> Update:</h4>\n\n<ul>\n";
@@ -71,35 +54,43 @@
             install +="<li><b>Everyone: </b>" + clone_repo + "</li>\n";
             update +="<li><b>Everyone: </b>" + git_pull + "</li>\n";
         }
-
-        // Get the TDW-related requirements.
-        let setup_url = "https://raw.githubusercontent.com/" + repo + "/" + main_branch + "/setup.py";
-        if (repo_names[i] === "tdw"){
-            setup_url = "https://raw.githubusercontent.com/threedworld-mit/tdw/master/Python/setup.py";
-        }
         $.ajax({
             async: false,
             type: 'GET',
             url: setup_url,
             datatype: 'text',
             success: function(resp){
-                let install_requires = /install_requires=\[((.|\n)*)\]/sgm.exec(resp)[1].split(',');
-                for (j = 0; j < install_requires.length; j++){
-                    install_requires[j] = install_requires[j].replace(/'/g, '');
-                    if (install_requires[j].includes("==")){
+                if (repo_names[i] === "tdw"){
+                    version = /__version__ = "(.*)"/.exec(resp)[1];
+                }
+                else{
+                    version = /version="(.*)"/.exec(resp)[1];
+                }
+                let install_requires_raw = /install_requires=\[((.|\n)*)\]/sgm.exec(resp)[1].split(',');
+                let install_requires = [];
+                for (j = 0; j < install_requires_raw.length; j++){
+                    install_requires_raw[j] = install_requires_raw[j].replace(/'/g, '');
+                    if (install_requires_raw[j].includes("==")){
                         for (k = 0; k < repo_names.length; k++){
-                        if (install_requires[j].includes(repo_names[k])){
-                            install += "<ul><li>Requires: " + install_requires[j] + "</li></ul>\n";
+                            if (install_requires_raw[j].includes(repo_names[k])){
+                                install_requires.push(install_requires_raw[j]);
+                            }
                         }
                     }
-                    }
+                }
+                if (install_requires.length > 0){
+                    install += "\n\n<p><b>Requires:</b> " + install_requires.join(", ") + "</p>\n";
                 }
             }
         });
         install += "</ul>\n\n";
         update += "</ul>\n\n";
+        let repo_div = '<div id="' + repo_names[i] + '">\n';
+        repo_div += '<h2><a href="https://github.com/' + repo + '">' + repo_names[i] + "</a></h2>\n\n<p>" + descriptions[i] + "</p>\n\n";
+        repo_div += '<h4>Latest: <a href="' + latest_release_url + '">' + version + '</a></h4>';
         repo_div += install + update;
 
+        let repo_url = "https://api.github.com/repos/" + repo;
         // Get issues and pull requests.
         $.ajax({
             async: false,
@@ -110,36 +101,34 @@
             },
             success: function(resp){
                 let issues = "<h4><img src=\"images/issue-opened-16.svg\" alt='issues'> Issues:</h4>";
+                let pulls = "<h4><img src=\"images/git-pull-request-16.svg\" alt='pull requests'> Pull Requests:</h4>";
                 issues += "<ul>";
+                pulls += "<ul>";
                 $.each(resp, function (i, issue) {
+                    let issue_html = ('<li><a href="' + issue.html_url + '">' + issue.number + ": " + issue.title + '</a></li>');
                     if (!issue.hasOwnProperty("pull_request")){
-                        issues += ('<li><a href="' + issue.html_url + '">' + issue.number + ": " + issue.title + '</a></li>');
+                        issues += issue_html;
+                    }
+                    else{
+                        pulls += issue_html;
                     }
                 });
                 issues += "</ul>";
+                pulls += "</ul>";
                 repo_div += issues;
+                repo_div += pulls;
             }
         });
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: repo_url + "/pulls",
-            data:{
-              state: "open"
-            },
-            success: function(resp){
-                let issues = "<h4><img src=\"images/git-pull-request-16.svg\" alt='pull requests'> Pull Requests:</h4>";
-                issues += "<ul>";
-                $.each(resp, function (i, issue) {
-                    issues += ('<li><a href="' + issue.html_url + '">' + issue.number + ": " + issue.title + '</a></li>');
-                });
-                issues += "</ul>";
-                repo_div += issues;
-            }
-        });
+
         repo_div += "</div>\n\n";
         $("body").append(repo_div);
     });
+    let sidebar = '<div class="sidenav" id="toc">\n';
+    repo_names.forEach(function(repo) {
+        sidebar += '<a href="#' + repo + '">' + repo + '</a>\n';
+    });
+    sidebar += "</div>";
+    $("body").append(sidebar);
 </script>
 </body>
 </html>
