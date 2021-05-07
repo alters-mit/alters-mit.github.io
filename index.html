@@ -9,6 +9,10 @@
 <script>
     $('head').append('<link rel="stylesheet" type="text/css" href="css/purple.css">');
     const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/transport_challenge", "alters-mit/multimodal_challenge"];
+    const unity_urls = ["https://github.com/threedworld-mit/tdw_visualizers", "https://github.com/alters-mit/robot_creator"];
+    const pypi_icon = '<img src="images/pypi.png" alt="pypi">';
+    const github_icon = '<img src="images/github.png" alt="pypi">';
+
     let repo_names = [];
     for (i = 0; i < repos.length; i++) {
         repo_names[i] = /\/(.*)/.exec(repos[i])[1];
@@ -37,17 +41,18 @@
         let install = "<h4><img src='images/desktop-download-16.svg' alt='install'> Install:</h4>\n\n<ul>\n";
         let update = "<h4><img src='images/repo-pull-16.svg' alt='update'> Update:</h4>\n\n<ul>\n";
         let git_pull = "<code>cd path/to/" + repo_names[i] + "</code> and <code>git pull</code>";
+        let git_clone = github_icon + "<code>git clone " + "https://github.com/" + repo + ".git</code>";
         let clone_repo = "";
         if (repo === "threedworld-mit/tdw"){
-            clone_repo = "Clone the repo, <code>cd path/to/" + repo_names[i] + "/Python</code> and <code>pip3 install -e .</code>";
+            clone_repo = git_clone + " and <code>cd path/to/" + repo_names[i] + "/Python</code> and <code>pip3 install -e .</code>";
         }
         else{
-            clone_repo = "Clone the repo, <code>cd path/to/" + repo_names[i] + "</code> and <code>pip3 install -e .</code>";
+            clone_repo = git_clone + " and <code>cd path/to/" + repo_names[i] + "</code> and <code>pip3 install -e .</code>";
         }
         if (pypi[i] != null){
-            install += "<li><b>Users: </b><code>pip3 install " + pypi[i] + "</code></li>\n";
+            install += "<li><b>Users:</b> " + pypi_icon + " <code>pip3 install " + pypi[i] + "</code></li>\n";
             install += "<li><b>Developers:</b> " + clone_repo + "</li>\n";
-            update += "<li><b>Users: </b><code>pip3 install " + pypi[i] + " -U</code></li>\n";
+            update += "<li><b>Users:</b> " + pypi_icon + " <code>pip3 install " + pypi[i] + " -U</code></li>\n";
             update += "<li><b>Developers:</b> " + git_pull + "</li>\n";
         }
         else{
@@ -79,7 +84,7 @@
                     }
                 }
                 if (install_requires.length > 0){
-                    install += "\n\n<p><b>Requires:</b> " + install_requires.join(", ") + "</p>\n";
+                    install += "\n\n<p><b>Requires:</b> " + install_requires.join(" and ") + "</p>\n";
                 }
             }
         });
@@ -123,8 +128,25 @@
         repo_div += "</div>\n\n";
         $("body").append(repo_div);
     });
+
+    // Append Unity repos.
+    const unit_descriptions = ["Display images of TDW models and visual materials", "Create robot asset bundles for TDW"];
+    unity_urls.forEach(function(unity_url, i) {
+        // Source: https://stackoverflow.com/a/16848676
+        let unity_name = /(\/)(?!.*\/)(.*)/.exec(unity_url)[2];
+        let unity_div = '<div id="' + unity_name + '">\n';
+        unity_div += '<h2><a href="' + unity_url + '">' + unity_name + "</a></h2>\n\n<p>" + unit_descriptions[i] + "</p>\n\n";
+        unity_div += "</div>\n\n";
+        $("body").append(unity_div);
+    });
+
+    // Build the sidebar.
     let sidebar = '<div class="sidenav" id="toc">\n';
     repo_names.forEach(function(repo) {
+        sidebar += '<a href="#' + repo + '">' + repo + '</a>\n';
+    });
+    unity_urls.forEach(function(url){
+        let repo = /(\/)(?!.*\/)(.*)/.exec(url)[2];
         sidebar += '<a href="#' + repo + '">' + repo + '</a>\n';
     });
     sidebar += "</div>";
