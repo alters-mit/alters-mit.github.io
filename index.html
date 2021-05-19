@@ -7,6 +7,17 @@
 </head>
 <body>
 <script>
+    // Source: https://stackoverflow.com/a/46215202
+    function copy(text) {
+    let input = document.createElement('input');
+    input.setAttribute('value', text);
+    document.body.appendChild(input);
+    input.select();
+    let result = document.execCommand('copy');
+    document.body.removeChild(input);
+    return result;
+ }
+
     $('head').append('<link rel="stylesheet" type="text/css" href="css/purple.css">');
     const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/transport_challenge", "alters-mit/multimodal_challenge"];
     const unity_urls = ["https://github.com/threedworld-mit/tdw_visualizers", "https://github.com/alters-mit/robot_creator"];
@@ -24,6 +35,17 @@
         "Extension of the Magnebot API for the Transport Challenge",
         "Multi-modal challenge for the Magnebot API"];
 
+    // The spacer string for install scripts.
+    let spacer = " ???? ";
+    if (navigator.appVersion.indexOf("Mac") != -1 || navigator.appVersion.indexOf("Linux") != -1)
+    {
+        spacer = " && ";
+    }
+    else if (navigator.appVersion.indexOf("Win") != -1)
+    {
+        spacer = " ; ";
+    }
+
     // Get the name of the repo and the latest release.
     repos.forEach(function(repo, i) {
         let main_branch = "main";
@@ -40,24 +62,44 @@
         // Get install and update instructions.
         let install = "<h4><img src='images/desktop-download-16.svg' alt='install'> Install:</h4>\n\n<ul>\n";
         let update = "<h4><img src='images/repo-pull-16.svg' alt='update'> Update:</h4>\n\n<ul>\n";
-        let git_pull = "<code>cd path/to/" + repo_names[i] + "</code> and <code>git pull</code>";
-        let git_clone = github_icon + " <code>git clone " + "https://github.com/" + repo + ".git</code>";
+        let git_pull = "cd " + repo_names[i] + spacer + "git pull";
+        let git_clone = github_icon + " <code>git clone " + "https://github.com/" + repo + ".git";
+        // Install script to install.
+        let install_script = "git clone https://github.com/" + repo + ".git" + spacer;
+        if (repo === "threedworld-mit/tdw")
+        {
+            install_script += "cd tdw/Python"
+        }
+        else{
+            install_script += "cd " + repo_names[i];
+        }
+        install_script += spacer + "pip3 install -e .";
+
         let clone_repo = "";
         if (repo === "threedworld-mit/tdw"){
-            clone_repo = git_clone + " and <code>cd path/to/" + repo_names[i] + "/Python</code> and <code>pip3 install -e .</code>";
+            clone_repo = git_clone + spacer + "cd " + repo_names[i] + "/Python" + spacer + "pip3 install -e .</code>";
         }
         else{
-            clone_repo = git_clone + " and <code>cd path/to/" + repo_names[i] + "</code> and <code>pip3 install -e .</code>";
+            clone_repo = git_clone + spacer + "cd " + repo_names[i] + spacer  + "pip3 install -e .</code>";
         }
         if (pypi[i] != null){
-            install += "<li><b>Users:</b> " + pypi_icon + " <code>pip3 install " + pypi[i] + "</code></li>\n";
-            install += "<li><b>Developers:</b> " + clone_repo + "</li>\n";
-            update += "<li><b>Users:</b> " + pypi_icon + " <code>pip3 install " + pypi[i] + " -U</code></li>\n";
-            update += "<li><b>Developers:</b> " + git_pull + "</li>\n";
+            let pip_install = "pip3 install " + pypi[i];
+            let pip_update = "pip3 install " + pypi[i] + " -U";
+            install += "<li><b>Users:</b> " + pypi_icon + " <code>" + pip_install + "</code> ";
+            install += '<button type="button" onClick="copy(' + "'"  + pip_install + "')" + '">Copy</button></li>\n';
+            install += "<li><b>Developers:</b> " + clone_repo + " ";
+            install += '<button type="button" onClick="copy(' + "'"  + install_script + "')" + '">Copy</button></li>\n';
+
+            update += "<li><b>Users:</b> " + pypi_icon + " <code>" + pip_update + "</code> ";
+            update += '<button type="button" onClick="copy(' + "'"  + pip_update + "')" + '">Copy</button></li>\n';
+            update +="<li><b>Developers: </b>" + github_icon + " <code>" + git_pull + "</code> ";
+            update += '<button type="button" onClick="copy(' + "'"  + git_pull + "')" + '">Copy</button></li>\n';
         }
         else{
-            install +="<li><b>Everyone: </b>" + clone_repo + "</li>\n";
-            update +="<li><b>Everyone: </b>" + git_pull + "</li>\n";
+            install +="<li><b>Everyone: </b>" + clone_repo + " ";
+            install += '<button type="button" onClick="copy(' + "'"  + install_script + "')" + '">Copy</button></li>\n';
+            update +="<li><b>Everyone: </b>" + github_icon + " <code>" + git_pull + "</code> ";
+            update += '<button type="button" onClick="copy(' + "'"  + git_pull + "')" + '">Copy</button></li>\n';
         }
         $.ajax({
             async: false,
