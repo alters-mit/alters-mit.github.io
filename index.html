@@ -19,7 +19,7 @@
  }
 
     $('head').append('<link rel="stylesheet" type="text/css" href="css/purple.css">');
-    const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/transport_challenge", "alters-mit/multimodal_challenge"];
+    const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/tdw_image_dataset", "alters-mit/transport_challenge", "alters-mit/multimodal_challenge"];
     const unity_urls = ["https://github.com/threedworld-mit/tdw_visualizers", "https://github.com/alters-mit/robot_creator"];
     const pypi_icon = '<img src="images/pypi.png" alt="pypi">';
     const github_icon = '<img src="images/github.png" alt="pypi">';
@@ -32,6 +32,7 @@
     const descriptions = ["ThreeDWorld simulation environment",
         "High-level API for the TDW Magnebot",
         "Generic structures to create TDW physics datasets",
+        "Generate a synthetic image dataset",
         "Extension of the Magnebot API for the Transport Challenge",
         "Multi-modal challenge for the Magnebot API"];
 
@@ -117,7 +118,7 @@
                 let install_requires = [];
                 for (j = 0; j < install_requires_raw.length; j++){
                     install_requires_raw[j] = install_requires_raw[j].replace(/'/g, '');
-                    if (install_requires_raw[j].includes("==")){
+                    if (install_requires_raw[j].includes("==") || install_requires_raw[j].includes(">=")){
                         for (k = 0; k < repo_names.length; k++){
                             if (install_requires_raw[j].includes(repo_names[k])){
                                 install_requires.push(install_requires_raw[j]);
