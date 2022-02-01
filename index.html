@@ -19,7 +19,7 @@
  }
 
     $('head').append('<link rel="stylesheet" type="text/css" href="css/purple.css">');
-    const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/tdw_image_dataset", "alters-mit/transport_challenge", "alters-mit/multimodal_challenge"];
+    const repos = ["threedworld-mit/tdw", "alters-mit/magnebot", "alters-mit/tdw_physics", "alters-mit/tdw_image_dataset", "alters-mit/transport_challenge"];
     const unity_urls = ["https://github.com/threedworld-mit/tdw_visualizers", "https://github.com/alters-mit/robot_creator"];
     const pypi_icon = '<img src="images/pypi.png" alt="pypi">';
     const github_icon = '<img src="images/github.png" alt="pypi">';
@@ -33,8 +33,7 @@
         "High-level API for the TDW Magnebot",
         "Generic structures to create TDW physics datasets",
         "Generate a synthetic image dataset",
-        "Extension of the Magnebot API for the Transport Challenge",
-        "Multi-modal challenge for the Magnebot API"];
+        "Extension of the Magnebot API for the Transport Challenge"];
 
     // The spacer string for install scripts.
     let spacer = " ???? ";
@@ -173,15 +172,29 @@
     });
 
     // Append Unity repos.
-    const unit_descriptions = ["Display images of TDW models and visual materials", "Create robot asset bundles for TDW"];
+    const unity_descriptions = ["Display images of TDW models and visual materials", "Create robot asset bundles for TDW"];
     unity_urls.forEach(function(unity_url, i) {
         // Source: https://stackoverflow.com/a/16848676
         let unity_name = /(\/)(?!.*\/)(.*)/.exec(unity_url)[2];
         let unity_div = '<div id="' + unity_name + '">\n';
-        unity_div += '<h2><a href="' + unity_url + '">' + unity_name + "</a></h2>\n\n<p>" + unit_descriptions[i] + "</p>\n\n";
+        unity_div += '<h2><a href="' + unity_url + '">' + unity_name + "</a></h2>\n\n<p>" + unity_descriptions[i] + "</p>\n\n";
         unity_div += "</div>\n\n";
         $("body").append(unity_div);
     });
+
+    // Append private repos.
+    const private_descriptions = ["Unity C# source code"];
+    const private_urls = ["https://github.com/neuroailab/TDWBase"];
+    const private_repo_names = ["TDWBase"];
+    private_urls.forEach(function(private_url, i) {
+        // Source: https://stackoverflow.com/a/16848676
+        let repo_name = private_repo_names[i];
+        let repo_div = '<div id="' + repo_name + '">\n';
+        repo_div += '<h2><a href="' + private_url + '">' + repo_name + "</a></h2>\n\n<p><i>Private repo</i> " + private_descriptions[i] + "</p>\n\n";
+        repo_div += "</div>\n\n";
+        $("body").append(repo_div);
+    });
+
 
     // Build the sidebar.
     let sidebar = '<div class="sidenav" id="toc">\n';
