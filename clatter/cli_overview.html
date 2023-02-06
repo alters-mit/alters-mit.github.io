@@ -1,0 +1,120 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>Clatter CLI</h1>
+<p>Use the Clatter command-line executable to generate audio and save it as a .wav file.</p>
+
+
+<p><strong>Download:</strong></p>
+
+<p><a href="https://github.com/alters-mit/clatter/releases/download/0.1.0/clatter_linux">Linux</a>&emsp;<a href="https://github.com/alters-mit/clatter/releases/download/0.1.0/clatter_osx">OSX</a>&emsp;<a href="https://github.com/alters-mit/clatter/releases/download/0.1.0/clatter.exe">Windows</a>&emsp;</p>
+<p>Example call to write impact audio:</p>
+<p><pre><code>./clatter.exe --primary_material glass_1 --primary_amp 0.2 --primary_resonance 0.2 --primary_mass 1 --secondary_material stone_4 --secondary_amp 0.5 --secondary_resonance 0.1 --secondary_mass 100 --speed 1 --type impact --path out.wav</code></pre></p>
+<p>Example call to write scrape audio:</p>
+<p><pre><code>./clatter.exe --primary_material glass_1 --primary_amp 0.2 --primary_resonance 0.2 --primary_mass 1 --secondary_material stone_4 --secondary_amp 0.5 --secondary_resonance 0.1 --secondary_mass 100 --speed 1 --type scrape --scrape_material ceramic --duration 3 --path out.wav</code></pre></p>
+<p>Not all arguments are shown in these examples. For a full list of arguments:</p>
+<p><pre><code>./clatter.exe --help</code></pre></p>
+<p>The <code>--path</code> argument is optional; if you omit it, the wav data (without a header) will be written to standard out, which can allow you to treat the clatter CLI as a library. In this example, we call clatter.exe from a Python script, read <code>stdout</code> and play the audio using pygame:</p>
+<p><pre><code>from time import sleep
+from subprocess import run, PIPE
+import pygame.mixer</p>
+<p>resp = run(['./clatter.exe',
+            '--primary_material', 'glass_1',
+            '--primary_amp', '0.2',
+            '--primary_resonance', '0.2',
+            '--primary_mass', '1',
+            '--secondary_material', 'stone_4',
+            '--secondary_amp', '0.5',
+            '--secondary_resonance', '0.1',
+            '--secondary_mass', '100',
+            '--speed', '1',
+            '--type', 'impact'],
+           check=True,
+           stdout=PIPE)
+pygame.mixer.init(allowedchanges=pygame.AUDIO_ALLOW_CHANNELS_CHANGE)
+sound = pygame.mixer.Sound(resp.stdout)
+sound.play()
+sleep(sound.get_length())
+</pre></code</p></div></div></div></body></html>

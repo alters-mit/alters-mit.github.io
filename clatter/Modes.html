@@ -1,0 +1,228 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>Modes</h1>
+
+<p class="subtitle">class in Clatter.Core</p>
+
+<p>Audio modes data for an object. This is usually meant to be automatically created and adjusted within an <a href="AudioEvent.html"><code>AudioEvent</code></a>.</p><h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>synthSound</th>
+		<th>double[]</th>
+		<th>The cached synth sound array. </th>
+		<th>new double[Globals.DEFAULT_SAMPLES_LENGTH]</th>
+	</tr>
+	<tr>
+		<th>synthSoundLength</th>
+		<th>int</th>
+		<th>The actual length of the synth sound (usually less than synthSound.Length). </th>
+		<th></th>
+	</tr>
+</table>
+
+<h2>Static Methods</h2>
+
+<h3>Add</h3>
+
+<p><code>public static int Add(double[] a, int aLength, double[] b, int bLength, ref double[] added)</code></p>
+
+<p>Add together arrays of different lengths by zero-padding the shorter.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th>double[]</th>
+		<th>The first array.</th>
+	</tr>	<tr>
+		<th>aLength</th>
+		<th>int</th>
+		<th>The length of the first array (can be less than the true length).</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th>double[]</th>
+		<th>The second array.</th>
+	</tr>	<tr>
+		<th>bLength</th>
+		<th>int</th>
+		<th>The length of the second array (can be less than the true length).</th>
+	</tr>	<tr>
+		<th>added</th>
+		<th>ref double[]</th>
+		<th>The output array.</th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>Modes</h3>
+
+<p><code>public Modes(ImpactMaterialData material, Random rng)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>material</th>
+		<th><a href="ImpactMaterialData.html"><code>ImpactMaterialData</code></a></th>
+		<th>The impact material data.</th>
+	</tr>	<tr>
+		<th>rng</th>
+		<th>Random</th>
+		<th>The random number generator.</th>
+	</tr>
+</table>
+
+<h3>Sum</h3>
+
+<p><code>public void Sum(double resonance)</code></p>
+
+<p>Create a mode time-series from mode properties and sum them together.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>resonance</th>
+		<th>double</th>
+		<th>The object's audio resonance value. This affects the decay times of audio generated by this object.</th>
+	</tr>
+</table>
+
+<h3>AdjustPowers</h3>
+
+<p><code>public void AdjustPowers(Random rng)</code></p>
+
+<p>Adjust the powers.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>rng</th>
+		<th>Random</th>
+		<th>The random number generator.</th>
+	</tr>
+</table>
+
+<h3>AddAmpToDecayTimes</h3>
+
+<p><code>public void AddAmpToDecayTimes(double amp)</code></p>
+
+<p>Add an amp value to the decay times array.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>amp</th>
+		<th>double</th>
+		<th>The amp value.</th>
+	</tr>
+</table></div></div></div></body></html>

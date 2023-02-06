@@ -1,0 +1,288 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>Scrape</h1>
+
+<p class="subtitle">class in Clatter.Core</p>
+
+<p class="subtitle">Inherits from <a href="AudioEvent.html"><code>AudioEvent</code></a></p>
+
+<p>Generates scrape audio.</p>
+<p>A Scrape is a series of continuous events. By repeatedly calling GetAudio(), the scrape event will continue.</p>
+
+<p>Scrape events are automatically generated from collision data within <a href="AudioGenerator.html"><code>AudioGenerator</code></a>. You can also manually create a Scrape and use it to generate audio without needing to use an <a href="AudioGenerator.html"><code>AudioGenerator</code></a>. This can be useful if you want to generate audio without needing to create a physics simulation.</p><h2>Constants</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>SAMPLES_LENGTH</th>
+		<th>int</th>
+		<th>The length of the scrape samples. </th>
+		<th>4410</th>
+	</tr>
+</table>
+
+<h2>Static Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>scrapeAmp</th>
+		<th>double</th>
+		<th>When setting the amplitude for a scrape, multiply AudioEvent.simulationAmp by this factor. </th>
+		<th>1</th>
+	</tr>
+	<tr>
+		<th>maxSpeed</th>
+		<th>double</th>
+		<th>For the purposes of scrape audio generation, the collision speed is clamped to this maximum value in meters per second. </th>
+		<th>5</th>
+	</tr>
+	<tr>
+		<th>simulationAmp</th>
+		<th>double</th>
+		<th>The overall amplitude of the simulation. The amplitude of generated audio is scaled by this factor. Must be between 0 and 0.99  Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.
+
+</th>
+		<th>0.9</th>
+	</tr>
+</table>
+
+<h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>scrapeId</th>
+		<th>int</th>
+		<th>The ID of this scrape event. This is used to track an ongoing scrape.  Readonly.</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>samples</th>
+		<th><a href="Samples.html"><code>Samples</code></a></th>
+		<th>The audio samples generated from this event.  Readonly. Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.
+
+</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>state</th>
+		<th><a href="EventState.html"><code>EventState</code></a></th>
+		<th>The current state of the AudioEvent. This is not the same thing as whether any audio is playing. An <a href="Impact.html"><code>Impact</code></a> ends when too much time has elapsed since the most recent impact collision. A <a href="Scrape.html"><code>Scrape</code></a> ends when the object is moving too slowly.  Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.
+
+</th>
+		<th>EventState.start</th>
+	</tr>
+</table>
+
+<h2>Static Methods</h2>
+
+<h3>GetNumScrapeEvents</h3>
+
+<p><code>public static int GetNumScrapeEvents(double duration)</code></p>
+
+<p>Returns the number of scrape events given a duration.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>duration</th>
+		<th>double</th>
+		<th>The duration of the scrape in seconds.</th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>Scrape</h3>
+
+<p><code>public Scrape(ScrapeMaterial scrapeMaterial, ClatterObjectData primary, ClatterObjectData secondary, Random rng)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>scrapeMaterial</th>
+		<th><a href="ScrapeMaterial.html"><code>ScrapeMaterial</code></a></th>
+		<th>The scrape material.</th>
+	</tr>	<tr>
+		<th>primary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The primary object (the smaller, moving object).</th>
+	</tr>	<tr>
+		<th>secondary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The secondary object (the scrape surface).</th>
+	</tr>	<tr>
+		<th>rng</th>
+		<th>Random</th>
+		<th>The random number generator.</th>
+	</tr>
+</table>
+
+<h3>GetAudio</h3>
+
+<p><code>public override bool GetAudio(double speed)</code></p>
+
+<p>Generate audio. Returns true if audio was generated. This will set the samples field.</p>
+
+<p>Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>speed</th>
+		<th>double</th>
+		<th>The collision speed in meters per second.</th>
+	</tr>
+</table>
+
+
+
+<h2>Code Examples</h2>
+
+
+
+<p></p>
+<pre><code>using System;
+using Clatter.Core;
+
+public class ScrapeAudioExample
+{
+    private static void Main(string[] args)
+    {
+        // Load the materials.
+        ImpactMaterial primaryMaterial = ImpactMaterial.glass_1;
+        ImpactMaterial secondaryMaterial = ImpactMaterial.stone_4;
+        ScrapeMaterial scrapeMaterial = ScrapeMaterial.ceramic;
+        ImpactMaterialData.Load(primaryMaterial);
+        ImpactMaterialData.Load(secondaryMaterial);
+        ScrapeMaterialData.Load(scrapeMaterial);
+        // Set the objects.
+        ClatterObjectData primary = new ClatterObjectData(0, primaryMaterial, 0.2, 0.2, 1);
+        ClatterObjectData secondary = new ClatterObjectData(1, secondaryMaterial, 0.5, 0.1, 100, scrapeMaterial);
+        // Initialize the scrape.
+        Scrape scrape = new Scrape(scrapeMaterial, primary, secondary, new Random());
+        // Start writing audio.
+        WavWriter writer = new WavWriter("out.wav", overwrite: true);
+        // Generate the scrape.
+        int count = Scrape.GetNumScrapeEvents(0.5);
+        for (int i = 0; i < count; i++)
+        {
+            scrape.GetAudio(1);
+            writer.Write(scrape.samples.ToInt16Bytes());
+        }
+        writer.End();
+    }
+}</code></pre>
+
+<p></p></div></div></div></body></html>

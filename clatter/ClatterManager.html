@@ -1,0 +1,318 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>ClatterManager</h1>
+
+<p class="subtitle">class in Clatter.Unity</p>
+
+<p class="subtitle">Inherits from <a href="MonoBehaviour.html"><code>MonoBehaviour</code></a></p>
+
+<p>Singleton manager class for Clatter in Unity. To initialize Clatter in Unity, you must add a ClatterManager to the scene, at least two GameObjects with an <a href="ClatterObject.html"><code>ClatterObject</code></a> component, and an AudioListener.</p>
+<p>Internally, ClatterManager stores data for each <a href="ClatterObject.html"><code>ClatterObject</code></a> in the scene and has a <a href="AudioGenerator.html"><code>Clatter.Core.AudioGenerator</code></a>. When a collision occurs between two <a href="ClatterObject.html"><code>ClatterObject</code></a> components, the collision will be converted into a <a href="CollisionEvent.html"><code>Clatter.Core.CollisionEvent</code></a> and announced to the ClatterManager, which will in turn feed it to the AudioGenerator (see AudioGenerator.AddCollision(collisionEvent)). ClatterManager then converts the generated audio into <a href="ImpactSound.html"><code>ImpactSound</code></a> or <a href="ScrapeSound.html"><code>ScrapeSound</code></a> components, which will play the sound and then self-destruct.</p>
+
+<p>ClatterManager can automatically update like any other MonoBehaviour class i.e. via Update() and FixedUpdate(). It might be convenient, especially to handle potential script execution order bugs, to manually update ClatterManager instead by setting auto == false. Either way, ClatterManager will call <a href="ClatterObject.html"><code>ClatterObject</code></a>.Initialize(id) and <a href="ClatterObject.html"><code>ClatterObject</code></a>.OnFixedUpdate() for each <a href="ClatterObject.html"><code>ClatterObject</code></a> in the scene.</p>
+
+<p>In Clatter, audio is generated from both fixed values and random values; see the constructor for <a href="Modes.html"><code>Clatter.Core.Modes</code></a> and Modes.AdjustPowers(). In most cases, you'll want the audio to be truly random. If you want to replicate the exact same audio every time you run your program, uncheck "Generate Random Seed" and then enter a seed.</p>
+
+<p>For a minimal example scene, see the "Impact" scene in the ClatterUnityExamples project.</p><h2>Static Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>instance</th>
+		<th><a href="ClatterManager.html"><code>ClatterManager</code></a></th>
+		<th>Singleton instance. </th>
+		<th></th>
+	</tr>
+</table>
+
+<h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>auto</th>
+		<th>bool</th>
+		<th>If true, automatically update by calling Awake(), Update(), and FixedUpdate() (like an ordinary MonoBehaviour object). If this is false, you must manually update instead by calling instance.Awake(), instance.OnUpdate(), and instance.OnFixedUpdate(). </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>generateRandomSeed</th>
+		<th>bool</th>
+		<th>If true, generate a new random seed. </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>seed</th>
+		<th>int</th>
+		<th>The random seed. Ignored if generateRandomSeed == true. </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>adjustAudioSettings</th>
+		<th>bool</th>
+		<th>If true, adjust the global audio settings for better-quality audio. </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>generator</th>
+		<th><a href="AudioGenerator.html"><code>AudioGenerator</code></a></th>
+		<th>The audio generator. </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>onDestroy</th>
+		<th>Action</th>
+		<th>Invoked when this is destroyed. </th>
+		<th></th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>OnAwake</h3>
+
+<p><code>public void OnAwake()</code></p>
+
+<p>Initialize the ClatterManager. If auto == true, this method is automatically called in Awake(). This method will find all <a href="ClatterObject.html"><code>ClatterObject</code></a> components in the scene and initialize them; see: <a href="ClatterObject.html"><code>ClatterObject</code></a>.Initialize(id). It will also initialize the internal AudioGenerator.</p>
+
+<h3>OnUpdate</h3>
+
+<p><code>public void OnUpdate()</code></p>
+
+<p>Call this once per frame to update ClatterManager. If auto == true, this method is automatically called in Update(). This method updates the internal <a href="AudioGenerator.html"><code>Clatter.Core.AudioGenerator</code></a> (see AudioGenerator.Update()) as well as each <a href="ClatterObject.html"><code>ClatterObject</code></a> the scene; see <a href="ClatterObject.html"><code>ClatterObject</code></a>.OnUpdate().</p>
+
+<h3>OnFixedUpdate</h3>
+
+<p><code>public void OnFixedUpdate()</code></p>
+
+<p>Call this once per physics frame to update ClatterManager. If auto == true, this method is automatically called in FixedUpdate(). This method updates each <a href="ClatterObject.html"><code>ClatterObject</code></a> the scene; see: <a href="ClatterObject.html"><code>ClatterObject</code></a>.OnFixedUpdate().</p>
+
+
+
+<h2>Code Examples</h2>
+
+
+
+<p>Create a Clatter scene in Unity purely from code. See the "Marbles" scene in ClatterUnityExamples.</p>
+
+<p></p>
+<pre><code>using UnityEngine;
+using Clatter.Core;
+using Clatter.Unity;
+using Random = System.Random;
+
+// Drop lots of marbles, generating impact sounds.
+public class Marbles : MonoBehaviour
+{
+    // The diameter of a marble.
+    private const float DIAMETER = 0.013f;
+    // The spacing between the marbles.
+    private const float SPACING = 0.1f;
+    // The padded half-extent of the floor.
+    private const float EXTENT = 0.4f;
+    
+    // The random seed.
+    public int seed;
+
+    private void Awake()
+    {
+        // Generate the floor.
+        GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        floor.transform.localScale = new Vector3(1, 0.015f, 1);
+        floor.name = "floor";
+        // Generate audio from the floor.
+        ClatterObject f = floor.AddComponent<ClatterObject>();
+        f.impactMaterial = ImpactMaterialUnsized.metal;
+        f.autoSetSize = false;
+        f.size = 4;
+        f.amp = 0.5;
+        f.resonance = 0.4;
+        // Add the floor's Rigidbody and set the mass.
+        Rigidbody fr = floor.AddComponent<Rigidbody>();
+        fr.isKinematic = true;
+        fr.mass = 100;
+        // Create the random number generator.
+        Random rng = new Random(seed);
+        // Add marbles in a grid.
+        float z = -EXTENT;
+        while (z < EXTENT)
+        {
+            float x = -EXTENT;
+            while (x < EXTENT)
+            {
+                GameObject marble = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                // Set a random y value.
+                float y = 1.8f + (float)rng.NextDouble();
+                // Set the position.
+                marble.transform.position = new Vector3(x, y, z);
+                // Set the scale.
+                marble.transform.localScale = new Vector3(DIAMETER, DIAMETER, DIAMETER);
+                // Set a random color.
+                marble.GetComponent<MeshRenderer>().material.color = new Color((float)rng.NextDouble(), (float)rng.NextDouble(), (float)rng.NextDouble(), 1);
+                // Add the Rigidbody.
+                Rigidbody mr = marble.AddComponent<Rigidbody>();
+                mr.mass = 0.03f;
+                // Add the audio data.
+                ClatterObject clatterObject = marble.AddComponent<ClatterObject>();
+                clatterObject.impactMaterial = ImpactMaterialUnsized.glass;
+                clatterObject.autoSetSize = false;
+                clatterObject.size = 0;
+                clatterObject.bounciness = 0.6f;
+                clatterObject.resonance = 0.05;
+                clatterObject.amp = 0.2;
+                x += SPACING;
+            }
+            z += SPACING;
+        }
+        // Add the ClatterManager.
+        GameObject go = new GameObject("ClatterManager");
+        ClatterManager cm = go.AddComponent<ClatterManager>();
+        cm.auto = true;
+        cm.OnAwake();
+    }
+}</code></pre>
+
+<p></p>
+
+<p>Create a Clatter scene that listens for collision events. This example sets auto to False and manually updates ClatterManager from a separate script. This way, we can be certain that ClatterManager.OnAwake() will be invoked after the listener script awakens. See "CollisionListener" in ClatterUnityExamples.</p>
+
+<p></p>
+<pre><code>using UnityEngine;
+using UnityEngine.UI;
+using Clatter.Core;
+using Clatter.Unity;
+
+
+// Listen for collisions and display their info in the UI. This example sets ClatterManager.auto to false in order to prevent script execution bugs.
+public class CollisionListener : MonoBehaviour
+{
+    // The UI text.
+    public Text text;
+    // The ClatterManager.
+    public ClatterManager clatterManager;
+
+
+    private void Awake()
+    {
+        clatterManager.generator.onImpact += OnCollision;
+        clatterManager.generator.onScrapeStart += OnCollision;
+        clatterManager.generator.onScrapeOngoing += OnCollision;
+        clatterManager.OnAwake();
+    }
+
+
+    private void OnCollision(CollisionEvent collisionEvent, Samples samples, Vector3d position, int audioSourceId)
+    {
+        if (collisionEvent.type != AudioEventType.none)
+        {
+            text.text = collisionEvent.primary.id + " " + collisionEvent.secondary.id + " " + collisionEvent.type;
+        }
+    }
+
+
+    private void Update()
+    {
+        clatterManager.OnUpdate();
+    }
+
+
+    private void FixedUpdate()
+    {
+        clatterManager.OnFixedUpdate();
+    }
+}</code></pre>
+
+<p></p></div></div></div></body></html>

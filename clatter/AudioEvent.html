@@ -1,0 +1,149 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>AudioEvent</h1>
+
+<p class="subtitle">abstract class in Clatter.Core</p>
+
+<p>AudioEvent is an abstract base class for generating audio from physics events. See: <a href="Impact.html"><code>Impact</code></a> and <a href="Scrape.html"><code>Scrape</code></a>.</p><h2>Static Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>simulationAmp</th>
+		<th>double</th>
+		<th>The overall amplitude of the simulation. The amplitude of generated audio is scaled by this factor. Must be between 0 and 0.99 </th>
+		<th>0.9</th>
+	</tr>
+</table>
+
+<h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>samples</th>
+		<th><a href="Samples.html"><code>Samples</code></a></th>
+		<th>The audio samples generated from this event.  Readonly.</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>state</th>
+		<th><a href="EventState.html"><code>EventState</code></a></th>
+		<th>The current state of the AudioEvent. This is not the same thing as whether any audio is playing. An <a href="Impact.html"><code>Impact</code></a> ends when too much time has elapsed since the most recent impact collision. A <a href="Scrape.html"><code>Scrape</code></a> ends when the object is moving too slowly. </th>
+		<th>EventState.start</th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>GetAudio</h3>
+
+<p><code>public abstract bool GetAudio(double speed)</code></p>
+
+<p>Generate audio. Returns true if audio was generated. This will set the samples field.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>speed</th>
+		<th>double</th>
+		<th>The collision speed in meters per second.</th>
+	</tr>
+</table></div></div></div></body></html>

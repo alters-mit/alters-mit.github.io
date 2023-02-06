@@ -1,0 +1,293 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>ImpactMaterialData</h1>
+
+<p class="subtitle">struct in Clatter.Core</p>
+
+<p>Audio synthesis data for an impact material. Every ImpactMaterialData has a corresponding ImpactMaterial (see: ImpactMaterialData.impactMaterials).</p>
+<p>This class contains useful helper methods for converting ImpactMaterialUnsized values to ImpactMaterial values, as well as means of deriving density and "size bucket" values.</p><h2>Static Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>impactMaterials</th>
+		<th><a href="ImpactMaterial.html"><code>ImpactMaterial</code></a></th>
+		<th>A dictionary of impact data. Key = An ImpactMaterial value. Value = An ImpactMaterialData. </th>
+		<th>new Dictionary<ImpactMaterial, ImpactMaterialData>()</th>
+	</tr>
+	<tr>
+		<th>Density</th>
+		<th><a href="ImpactMaterialUnsized.html"><code>ImpactMaterialUnsized</code></a></th>
+		<th>A dictionary of density values per impact material. Key = An ImpactMaterialUnsized. Value = Density in kg/m^3.  Readonly.</th>
+		<th>new Dictionary<ImpactMaterialUnsized, int>()
+        {
+            { ImpactMaterialUnsized.ceramic, 2180 },
+            { ImpactMaterialUnsized.glass, 2500 },
+            { ImpactMaterialUnsized.stone, 2000 },
+            { ImpactMaterialUnsized.metal, 8450 },
+            { ImpactMaterialUnsized.wood_hard, 1200 },
+            { ImpactMaterialUnsized.wood_medium, 700 },
+            { ImpactMaterialUnsized.wood_soft, 400 },
+            { ImpactMaterialUnsized.fabric, 1540 },
+            { ImpactMaterialUnsized.leather, 860 },
+            { ImpactMaterialUnsized.plastic_hard, 1150 },
+            { ImpactMaterialUnsized.plastic_soft_foam, 285 },
+            { ImpactMaterialUnsized.rubber, 1522 },
+            { ImpactMaterialUnsized.paper, 1200 },
+            { ImpactMaterialUnsized.cardboard, 698 }
+        }</th>
+	</tr>
+</table>
+
+<h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>cf</th>
+		<th>double[]</th>
+		<th>The frequency of the sinusoid used to create the mode in Hz. </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>op</th>
+		<th>double[]</th>
+		<th>The power of the mode at the onset, in dB relative to the amplitude of the "onset click". </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>rt</th>
+		<th>double[]</th>
+		<th>RT60 values. The time it takes a mode power to decay 60dB (i.e. 10^-6) from its onset power in seconds. </th>
+		<th></th>
+	</tr>
+</table>
+
+<h2>Static Methods</h2>
+
+<h3>Load</h3>
+
+<p><code>public static void Load(ImpactMaterial impactMaterial)</code></p>
+
+<p>Load impact material data from a file relative to this assembly.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>impactMaterial</th>
+		<th><a href="ImpactMaterial.html"><code>ImpactMaterial</code></a></th>
+		<th>The impact material.</th>
+	</tr>
+</table>
+
+<h3>GetImpactMaterial</h3>
+
+<p><code>public static void GetImpactMaterial(ImpactMaterialUnsized impactMaterialUnsized, int size)</code></p>
+
+<p>Parse a size bucket value and an ImpactMaterialUnsized value to get an ImpactMaterial value.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>impactMaterialUnsized</th>
+		<th><a href="ImpactMaterialUnsized.html"><code>ImpactMaterialUnsized</code></a></th>
+		<th>The unsized impact material.</th>
+	</tr>	<tr>
+		<th>size</th>
+		<th>int</th>
+		<th>The size bucket value (0-5).</th>
+	</tr>
+</table>
+
+<h3>GetSize</h3>
+
+<p><code>public static int GetSize(Vector3d extents)</code></p>
+
+<p>Returns the object's "size bucket" given the bounding box extents.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>extents</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The object's bounding box extents.</th>
+	</tr>
+</table>
+
+<h3>GetSize</h3>
+
+<p><code>public static int GetSize(double volume)</code></p>
+
+<p>Returns the object's "size bucket" given its volume.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>volume</th>
+		<th>double</th>
+		<th>The object's volume.</th>
+	</tr>
+</table>
+
+<h3>GetImpactMaterialUnsized</h3>
+
+<p><code>public static void GetImpactMaterialUnsized(ImpactMaterial impactMaterial)</code></p>
+
+<p>Parse a sized impact material to get an un-sized impact material.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>impactMaterial</th>
+		<th><a href="ImpactMaterial.html"><code>ImpactMaterial</code></a></th>
+		<th>The sized impact material.</th>
+	</tr>
+</table>
+
+
+
+<h2>Code Examples</h2>
+
+
+
+<p>To derive the "size bucket" and mass from an ImpactMaterialUnsized value and volume:</p>
+
+<p></p>
+<pre><code>using Clatter.Core;
+
+public class SizeBucket
+{
+    private uint nextId;
+
+    public ClatterObjectData Get(ImpactMaterialUnsized impactMaterialUnsized, double amp, double resonance, double volume, ScrapeMaterial? scrapeMaterial)
+    {
+        // Get the "size bucket".
+        int size = ImpactMaterialData.GetSize(volume);
+        // Get the impact material.
+        ImpactMaterial impactMaterial = ImpactMaterialData.GetImpactMaterial(impactMaterialUnsized, size);
+        // Get the density of the material.
+        double density = ImpactMaterialData.Density[impactMaterialUnsized];
+        // Derive the mass.
+        double mass = density * volume;
+        // Create the object.
+        ClatterObjectData a = new ClatterObjectData(nextId, impactMaterial, amp, resonance, mass, scrapeMaterial);
+        // Increment the ID for the next object.
+        nextId++;
+        return a;
+    }
+}</code></pre>
+
+<p></p></div></div></div></body></html>

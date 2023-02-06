@@ -1,0 +1,260 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>DoubleExtensions</h1>
+
+<p class="subtitle">class in Clatter.Core</p>
+
+<p>Extensions for doubles.</p><h2>Static Methods</h2>
+
+<h3>Clamp</h3>
+
+<p><code>public static double Clamp(this double d, double a, double b)</code></p>
+
+<p>Clamp this value to be between a and b.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>d</th>
+		<th>this double</th>
+		<th>(this)</th>
+	</tr>	<tr>
+		<th>a</th>
+		<th>double</th>
+		<th>The lower bound.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th>double</th>
+		<th>The upper bound (inclusive).</th>
+	</tr>
+</table>
+
+<h3>Convolve</h3>
+
+<p><code>public static void Convolve(this double[] a, double[] kernel, int length, ref double[] result)</code></p>
+
+<p>Convolve an array with the given kernel. Source: <a href="https://stackoverflow.com/a/7239016">7239016</a> This code is a more optimized version of the source.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th>this double[]</th>
+		<th>(this)</th>
+	</tr>	<tr>
+		<th>kernel</th>
+		<th>double[]</th>
+		<th>A convolution kernel.</th>
+	</tr>	<tr>
+		<th>length</th>
+		<th>int</th>
+		<th>The length of the convolved array.</th>
+	</tr>	<tr>
+		<th>result</th>
+		<th>ref double[]</th>
+		<th>The output array.</th>
+	</tr>
+</table>
+
+<h3>Interpolate1D</h3>
+
+<p><code>public static double Interpolate1D(this double value, double[] x, double[] y, double lower, double upper, int yIndexOffset, ref int startX, int endX)</code></p>
+
+<p>Interpolates data using a piece-wise linear function. This has been optimized from the source. Source: <a href="https://github.com/accord-net/framework/blob/master/Sources/Accord.Math/Tools.cs#L669">Tools.cs#L669</a></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>value</th>
+		<th>this double</th>
+		<th>The value to be calculated.</th>
+	</tr>	<tr>
+		<th>x</th>
+		<th>double[]</th>
+		<th>The input data points x. Those values need to be sorted.</th>
+	</tr>	<tr>
+		<th>y</th>
+		<th>double[]</th>
+		<th>The output data points y.</th>
+	</tr>	<tr>
+		<th>lower</th>
+		<th>double</th>
+		<th>The value to be returned for values before the first point in x .</th>
+	</tr>	<tr>
+		<th>upper</th>
+		<th>double</th>
+		<th>The value to be returned for values after the last point in x .</th>
+	</tr>	<tr>
+		<th>yIndexOffset</th>
+		<th>int</th>
+		<th>Offset the y index by this value.</th>
+	</tr>	<tr>
+		<th>startX</th>
+		<th>ref int</th>
+		<th>Start interpolating the x array at this index.</th>
+	</tr>	<tr>
+		<th>endX</th>
+		<th>int</th>
+		<th>The final index in the x array.</th>
+	</tr>
+</table>
+
+<h3>ToFloats</h3>
+
+<p><code>public static float[] ToFloats(this double[] a, int length)</code></p>
+
+<p>Returns this array converted to floats.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th>this double[]</th>
+		<th>(this)</th>
+	</tr>	<tr>
+		<th>length</th>
+		<th>int</th>
+		<th>The length of the converted array.</th>
+	</tr>
+</table>
+
+<h3>ToInt16Bytes</h3>
+
+<p><code>public static byte[] ToInt16Bytes(this double[] a, int length)</code></p>
+
+<p>Returns this array converted to a byte array of int16s.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th>this double[]</th>
+		<th>(this)</th>
+	</tr>	<tr>
+		<th>length</th>
+		<th>int</th>
+		<th>The length of the converted array.</th>
+	</tr>
+</table>
+
+<h3>MedianInPlace</h3>
+
+<p><code>public static double MedianInPlace(this double[] data)</code></p>
+
+<p>Estimates the median value from the unsorted data array. WARNING: Works inplace and can thus causes the data array to be reordered. Source: <a href="https://github.com/mathnet/mathnet-numerics/blob/master/src/Numerics/Statistics/ArrayStatistics.cs#L413">ArrayStatistics.cs#L413</a></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>data</th>
+		<th>this double[]</th>
+		<th>Sample array, no sorting is assumed. Will be reordered.</th>
+	</tr>
+</table></div></div></div></body></html>

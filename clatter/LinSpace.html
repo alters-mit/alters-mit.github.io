@@ -1,0 +1,148 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>LinSpace</h1>
+
+<p class="subtitle">class in Clatter.Core</p>
+
+<p>Linear space generator.</p><h2>Static Methods</h2>
+
+<h3>Get</h3>
+
+<p><code>public static double[] Get(double a, double b, int steps)</code></p>
+
+<p>Equivalent to numpy.linspace. This is an optimized version of this: <a href="https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Vector/Vector.Interval.Generated.cs">Vector.Interval.Generated.cs</a></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th>double</th>
+		<th>The start value.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th>double</th>
+		<th>The end value. It's assumed that b is greater than a.</th>
+	</tr>	<tr>
+		<th>steps</th>
+		<th>int</th>
+		<th>The number of steps.</th>
+	</tr>
+</table>
+
+<h3>GetInPlace</h3>
+
+<p><code>public static void GetInPlace(double a, double b, int steps, ref double[] arr)</code></p>
+
+<p>Equivalent to numpy.linspace. The array is generated in-place to avoid memory allocation. This is an optimized version of this: <a href="https://github.com/accord-net/framework/blob/development/Sources/Accord.Math/Vector/Vector.Interval.Generated.cs">Vector.Interval.Generated.cs</a></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th>double</th>
+		<th>The start value.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th>double</th>
+		<th>The end value. It's assumed that b is greater than a.</th>
+	</tr>	<tr>
+		<th>steps</th>
+		<th>int</th>
+		<th>The number of steps.</th>
+	</tr>	<tr>
+		<th>arr</th>
+		<th>ref double[]</th>
+		<th>The array. This will be resized if needed.</th>
+	</tr>
+</table></div></div></div></body></html>

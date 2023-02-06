@@ -1,0 +1,181 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>WavWriter</h1>
+
+<p class="subtitle">class in Clatter.Core</p>
+
+<p>Write audio samples to a .wav file. Instantiate a WavWriter to begin writing audio. Call Write(data) to continuously write chunks of audio data to the file. Call End() to stop writing and append the wav header data to the file.</p><h2>Methods</h2>
+
+<h3>WavWriter</h3>
+
+<p><code>public WavWriter(string path, bool overwrite=true, int channels=1)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>path</th>
+		<th>string</th>
+		<th>The path to the output file.</th>
+	</tr>	<tr>
+		<th>overwrite</th>
+		<th>bool</th>
+		<th>If true, overwrite an existing file.</th>
+	</tr>	<tr>
+		<th>channels</th>
+		<th>int</th>
+		<th>The number of audio channels.</th>
+	</tr>
+</table>
+
+<h3>Write</h3>
+
+<p><code>public void Write(byte[] audio)</code></p>
+
+<p>Write audio samples to the .wav file.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>audio</th>
+		<th>byte[]</th>
+		<th>The audio data as an int16 byte array.</th>
+	</tr>
+</table>
+
+<h3>End</h3>
+
+<p><code>public void End()</code></p>
+
+<p>End the wav file. Open the file and set metadata about data size. Source: <a href="https://docs.fileformat.com/audio/wav/"></a></p>
+
+
+
+<h2>Code Examples</h2>
+
+
+
+<p></p>
+<pre><code>using System;
+using Clatter.Core;
+
+public class ScrapeAudioExample
+{
+    private static void Main(string[] args)
+    {
+        // Load the materials.
+        ImpactMaterial primaryMaterial = ImpactMaterial.glass_1;
+        ImpactMaterial secondaryMaterial = ImpactMaterial.stone_4;
+        ScrapeMaterial scrapeMaterial = ScrapeMaterial.ceramic;
+        ImpactMaterialData.Load(primaryMaterial);
+        ImpactMaterialData.Load(secondaryMaterial);
+        ScrapeMaterialData.Load(scrapeMaterial);
+        // Set the objects.
+        ClatterObjectData primary = new ClatterObjectData(0, primaryMaterial, 0.2, 0.2, 1);
+        ClatterObjectData secondary = new ClatterObjectData(1, secondaryMaterial, 0.5, 0.1, 100, scrapeMaterial);
+        // Initialize the scrape.
+        Scrape scrape = new Scrape(scrapeMaterial, primary, secondary, new Random());
+        // Start writing audio.
+        WavWriter writer = new WavWriter("out.wav", overwrite: true);
+        // Generate the scrape.
+        int count = Scrape.GetNumScrapeEvents(0.5);
+        for (int i = 0; i < count; i++)
+        {
+            scrape.GetAudio(1);
+            writer.Write(scrape.samples.ToInt16Bytes());
+        }
+        writer.End();
+    }
+}</code></pre>
+
+<p></p></div></div></div></body></html>

@@ -1,0 +1,245 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>Impact</h1>
+
+<p class="subtitle">class in Clatter.Core</p>
+
+<p class="subtitle">Inherits from <a href="AudioEvent.html"><code>AudioEvent</code></a></p>
+
+<p>Generates impact audio.</p>
+<p>An Impact is actually a series of events. By reusing the same Impact object, data from previous impacts can affect the current impact. This is useful for situations such as an object repeatedly bouncing on a table.</p>
+
+<p>Impact events are automatically generated from collision data within <a href="AudioGenerator.html"><code>AudioGenerator</code></a>. You can also manually create an Impact and use it to generate audio without needing to use an <a href="AudioGenerator.html"><code>AudioGenerator</code></a>. This can be useful if you want to generate audio without needing to create a physics simulation.</p><h2>Static Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>preventDistortion</th>
+		<th>bool</th>
+		<th>If true, clamp the audio amplitude values to less than or equal to 0.99, preventing distortion. </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>clampContactTime</th>
+		<th>bool</th>
+		<th>If true, clamp the contact time to a plausible value. Set this to false if you want to generate impacts with unusually long contact times. </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>minTimeBetweenImpacts</th>
+		<th>double</th>
+		<th>The minimum time in seconds between impacts. If an impact occurs an this much time hasn't yet elapsed, the impact will be ignored. This can prevent strange "droning" sounds caused by too many impacts in rapid succession. </th>
+		<th>0.05</th>
+	</tr>
+	<tr>
+		<th>maxTimeBetweenImpacts</th>
+		<th>double</th>
+		<th>The maximum time in seconds between impacts. After this many seconds, this impact series will end and a subsequent impact collision will start a new Impact. </th>
+		<th>3</th>
+	</tr>
+	<tr>
+		<th>simulationAmp</th>
+		<th>double</th>
+		<th>The overall amplitude of the simulation. The amplitude of generated audio is scaled by this factor. Must be between 0 and 0.99  Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.
+
+</th>
+		<th>0.9</th>
+	</tr>
+</table>
+
+<h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>samples</th>
+		<th><a href="Samples.html"><code>Samples</code></a></th>
+		<th>The audio samples generated from this event.  Readonly. Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.
+
+</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>state</th>
+		<th><a href="EventState.html"><code>EventState</code></a></th>
+		<th>The current state of the AudioEvent. This is not the same thing as whether any audio is playing. An <a href="Impact.html"><code>Impact</code></a> ends when too much time has elapsed since the most recent impact collision. A <a href="Scrape.html"><code>Scrape</code></a> ends when the object is moving too slowly.  Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.
+
+</th>
+		<th>EventState.start</th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>Impact</h3>
+
+<p><code>public Impact(ClatterObjectData primary, ClatterObjectData secondary, Random rng)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>primary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The primary object.</th>
+	</tr>	<tr>
+		<th>secondary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The secondary object.</th>
+	</tr>	<tr>
+		<th>rng</th>
+		<th>Random</th>
+		<th>The random number generator.</th>
+	</tr>
+</table>
+
+<h3>GetAudio</h3>
+
+<p><code>public override bool GetAudio(double speed)</code></p>
+
+<p>Generate audio. Returns true if audio was generated. This will set the samples field.</p>
+
+<p>Inherited from <a href="AudioEvent.html"><code>AudioEvent</code></a>.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>speed</th>
+		<th>double</th>
+		<th>The collision speed in meters per second.</th>
+	</tr>
+</table>
+
+
+
+<h2>Code Examples</h2>
+
+
+
+<p></p>
+<pre><code>using Clatter.Core;
+
+public class ImpactAudioExample
+{
+    private static void Main(string[] args)
+    {
+        // Load the materials.
+        ImpactMaterial primaryMaterial = ImpactMaterial.glass_1;
+        ImpactMaterial secondaryMaterial = ImpactMaterial.stone_4;
+        ImpactMaterialData.Load(primaryMaterial);
+        ImpactMaterialData.Load(secondaryMaterial);
+        // Set the objects.
+        ClatterObjectData primary = new ClatterObjectData(0, primaryMaterial, 0.2, 0.2, 1);
+        ClatterObjectData secondary = new ClatterObjectData(1, secondaryMaterial, 0.5, 0.1, 100);
+        // Create the impact event.
+        Impact impact = new Impact(primary, secondary, new Random());
+        // Generate audio.
+        impact.GetAudio(1);
+        // Write the audio as a .wav file.
+        WavWriter writer = new WavWriter("out.wav", overwrite: true);
+        writer.Write(impact.samples.ToInt16Bytes());
+        writer.End();
+    }
+}</code></pre>
+
+<p></p></div></div></div></body></html>

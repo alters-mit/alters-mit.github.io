@@ -1,0 +1,374 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>ClatterObject</h1>
+
+<p class="subtitle">class in Clatter.Unity</p>
+
+<p class="subtitle">Inherits from <a href="MonoBehaviour.html"><code>MonoBehaviour</code></a></p>
+
+<p>A ClatterObject is a MonoBehaviour class wrapper for <a href="ClatterObjectData.html"><code>Clatter.Core.ClatterObjectData</code></a> that automatically converts Unity PhysX collisions into Clatter audio.</p>
+<p>A ClatterObject must have either a Rigidbody or ArticulationBody component and at least one Collider.</p>
+
+<p>ClatterObjects are automatically initialized and updated by <a href="ClatterManager.html"><code>ClatterManager</code></a>; you can use a ClatterObject without <a href="ClatterManager.html"><code>ClatterManager</code></a> but it's very difficult to do so. Notice that there is no Update or FixedUpdate call because it's assumed that <a href="ClatterManager.html"><code>ClatterManager</code></a> will call ClatterObject.OnUpdate() and ClatterObject.OnFixedUpdate().</p>
+
+<p>ClatterObject listens for Unity collision events (enter, stay, exit) and converts them into <a href="CollisionEvent.html"><code>Clatter.Core.CollisionEvent</code></a> data objects:</p>
+
+<ul>
+
+<li>
+
+<p>"Enter" events are always impacts.</p>
+
+</li>
+
+<li>
+
+<p>"Exit" events are always none-events.</p>
+
+</li>
+
+<li>
+
+<p>"Stay" events can be impacts, scrapes, rolls, or none-events.</p>
+
+</li>
+
+</ul>
+
+<p><img src="images/collision.png" width="50%"></p><h2>Static Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>minSpeed</th>
+		<th>double</th>
+		<th>The minimum collision speed in meters per second. If the collision is slower than this, it is ignored. </th>
+		<th>0.00001</th>
+	</tr>
+	<tr>
+		<th>areaNewCollision</th>
+		<th>double</th>
+		<th>On a collision stay event, if the previous area is None and the current area is greater than this, the audio event is either an impact or a scrape; see scrapeAngle. </th>
+		<th>1e-5</th>
+	</tr>
+	<tr>
+		<th>scrapeAngle</th>
+		<th>float</th>
+		<th>On a collision stay event, there is a large new contact area (see areaNewCollision), if the angle in degrees between Vector3.up and the normalized relative velocity of the collision is greater than this value, then the audio event is a scrape. Otherwise, it's an impact. </th>
+		<th>80</th>
+	</tr>
+	<tr>
+		<th>impactAreaRatio</th>
+		<th>double</th>
+		<th>On a collision stay event, if the area of the collision increases by at least this factor, the audio event is an impact. </th>
+		<th>5</th>
+	</tr>
+	<tr>
+		<th>rollAngularSpeed</th>
+		<th>double</th>
+		<th>On a collision stay event, if the angular speed in meters per second is greater than or equal to this value, the audio event is a roll; otherwise, it's a scrape. </th>
+		<th>1</th>
+	</tr>
+	<tr>
+		<th>maxContactSeparation</th>
+		<th>float</th>
+		<th>On a collision stay event, if we think the collision is an impact but any of the contact points are this far away or greater, the audio event is none. </th>
+		<th>1e-8f</th>
+	</tr>
+	<tr>
+		<th>filterDuplicates</th>
+		<th>bool</th>
+		<th>ClatterObject tries to filter duplicate collision events in two ways. First, it will remove any reciprocal pairs of objects, i.e. it will accept a collision between objects 0 and 1 but not objects 1 and 0. Second, it will register only the first collision between objects per main-thread update (multiple collisions can be registered because there are many physics fixed update calls in between). To allow duplicate events, set this field to false. </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>maxNumContacts</th>
+		<th>int</th>
+		<th>The maximum number of contact points that will be evaluated when setting the contact area and speed. A higher number can mean somewhat greater precision but at the cost of performance. </th>
+		<th>16</th>
+	</tr>
+	<tr>
+		<th>rollSubstitute</th>
+		<th><a href="AudioEventType.html"><code>AudioEventType</code></a></th>
+		<th>Roll audio events are not yet supported in Clatter. If a roll is registered, it is instead treated as this value. </th>
+		<th>AudioEventType.impact</th>
+	</tr>
+	<tr>
+		<th>defaultObjectData</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The default audio data. This is used whenever an <a href="ClatterObject.html"><code>ClatterObject</code></a> collides with a non-<a href="ClatterObject.html"><code>ClatterObject</code></a> object. </th>
+		<th>new ClatterObjectData(0, ImpactMaterial.wood_medium_4, 0.5f, 0.1f, 100, ScrapeMaterial.plywood)</th>
+	</tr>
+	<tr>
+		<th>DynamicFriction</th>
+		<th><a href="ImpactMaterialUnsized.html"><code>ImpactMaterialUnsized</code></a></th>
+		<th>Unity physic material dynamic friction values. Key: An ImpactMaterialUnsized value. Value: A dynamic friction float value.  Readonly.</th>
+		<th>new Dictionary<ImpactMaterialUnsized, float>()
+        {
+            { ImpactMaterialUnsized.ceramic, 0.47f },
+            { ImpactMaterialUnsized.wood_hard, 0.35f },
+            { ImpactMaterialUnsized.wood_medium, 0.35f },
+            { ImpactMaterialUnsized.wood_soft, 0.35f },
+            { ImpactMaterialUnsized.cardboard, 0.45f },
+            { ImpactMaterialUnsized.paper, 0.47f },
+            { ImpactMaterialUnsized.glass, 0.65f },
+            { ImpactMaterialUnsized.fabric, 0.65f },
+            { ImpactMaterialUnsized.leather, 0.4f },
+            { ImpactMaterialUnsized.stone, 0.7f },
+            { ImpactMaterialUnsized.rubber, 0.75f },
+            { ImpactMaterialUnsized.plastic_hard, 0.3f },
+            { ImpactMaterialUnsized.plastic_soft_foam, 0.45f },
+            { ImpactMaterialUnsized.metal, 0.43f }
+        }</th>
+	</tr>
+	<tr>
+		<th>StaticFriction</th>
+		<th><a href="ImpactMaterialUnsized.html"><code>ImpactMaterialUnsized</code></a></th>
+		<th>Unity physic material static friction values. Key: An ImpactMaterialUnsized value. Value: A static friction float value.  Readonly.</th>
+		<th>new Dictionary<ImpactMaterialUnsized, float>
+        {
+            { ImpactMaterialUnsized.ceramic, 0.47f },
+            { ImpactMaterialUnsized.wood_hard, 0.37f },
+            { ImpactMaterialUnsized.wood_medium, 0.37f },
+            { ImpactMaterialUnsized.wood_soft, 0.37f },
+            { ImpactMaterialUnsized.cardboard, 0.48f },
+            { ImpactMaterialUnsized.paper, 0.5f },
+            { ImpactMaterialUnsized.glass, 0.68f },
+            { ImpactMaterialUnsized.fabric, 0.67f },
+            { ImpactMaterialUnsized.leather, 0.43f },
+            { ImpactMaterialUnsized.stone, 0.72f },
+            { ImpactMaterialUnsized.rubber, 0.8f },
+            { ImpactMaterialUnsized.plastic_hard, 0.35f },
+            { ImpactMaterialUnsized.plastic_soft_foam, 0.47f },
+            { ImpactMaterialUnsized.metal, 0.47f }
+        }</th>
+	</tr>
+</table>
+
+<h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>impactMaterial</th>
+		<th><a href="ImpactMaterialUnsized.html"><code>ImpactMaterialUnsized</code></a></th>
+		<th>The unsized impact material. This will be converted into an ImpactMaterial by applying the size field (see below). </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>autoSetSize</th>
+		<th>bool</th>
+		<th>If true, the "size bucket" is automatically set based on its volume. </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>size</th>
+		<th>int</th>
+		<th>The "size bucket", on a scale of 0 to 5. To generate realistic audio, smaller objects should have smaller size bucket values. Ignored if autoSetSize == true. For more information, including how to derive size bucket values, see: Clatter.ImpactMaterial and Clatter.ImpactMaterialData. </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>hasScrapeMaterial</th>
+		<th>bool</th>
+		<th>If true, this object has a scrape material. </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>scrapeMaterial</th>
+		<th><a href="ScrapeMaterial.html"><code>ScrapeMaterial</code></a></th>
+		<th>The scrape material, if any. Ignored if hasScrapeMaterial == false. </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>amp</th>
+		<th>double</th>
+		<th>The audio amplitude (0 to 1). This affects the overall loudness of audio generated by this object. </th>
+		<th>0.1</th>
+	</tr>
+	<tr>
+		<th>resonance</th>
+		<th>double</th>
+		<th>The resonance value (0 to 1). This affects the decay times of audio generated by this object. </th>
+		<th>0.1</th>
+	</tr>
+	<tr>
+		<th>physicMaterialMode</th>
+		<th><a href="PhysicMaterialMode.html"><code>PhysicMaterialMode</code></a></th>
+		<th>The mode for how the object's physic material is set. </th>
+		<th>PhysicMaterialMode.auto</th>
+	</tr>
+	<tr>
+		<th>dynamicFriction</th>
+		<th>float</th>
+		<th>If physicMaterialMode == PhysicMaterialMode.manual, this is the physic material dynamic friction value (0 to 1). To derive friction values from Clatter.Core.ImpactMaterialUnsized values, see: ClatterObject.DynamicFriction. </th>
+		<th>0.1f</th>
+	</tr>
+	<tr>
+		<th>staticFriction</th>
+		<th>float</th>
+		<th>If physicMaterialMode == PhysicMaterialMode.manual, this is the physic material static friction value (0 to 1). To derive friction values from Clatter.Core.ImpactMaterialUnsized values, see: ClatterObject.StaticFriction. </th>
+		<th>0.1f</th>
+	</tr>
+	<tr>
+		<th>bounciness</th>
+		<th>float</th>
+		<th>If physicMaterialMode == PhysicMaterialMode.manual or physicMaterialMode == PhysicMaterialMode.auto, this is the physic material bounciness value (0 to 1). This always needs to be set on a per-object basis, as opposed to being derived from a Clatter.Core.ImpactMaterialUnsized value. </th>
+		<th>0.2f</th>
+	</tr>
+	<tr>
+		<th>massMode</th>
+		<th><a href="MassMode.html"><code>MassMode</code></a></th>
+		<th>The mode for how the mass is set. </th>
+		<th>MassMode.body</th>
+	</tr>
+	<tr>
+		<th>fakeMass</th>
+		<th>double</th>
+		<th>If massMode == MassMode.fake_mass, the underlying <a href="ClatterObjectData.html"><code>Clatter.Core.ClatterObjectData</code></a> will use this value when generating audio rather than the true mass of the Rigibody/ArticulationBody. </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>hollowness</th>
+		<th>double</th>
+		<th>If massMode == MassMode.volume, hollowness is the portion of the object that is hollow (0 to 1) as follows: mass = volume * density * (1 - hollowness) where volume is the sum of the bounding box sizes of each Renderer object and density is derived from the impact material (see: <a href="ImpactMaterialData.html"><code>Clatter.Core.ImpactMaterialData</code></a>). </th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>onDestroy</th>
+		<th>UnityEvent< uint ></th>
+		<th>Invoked when this object is destroyed. Parameters: The ID of this object, i.e. this.data.id. </th>
+		<th>new UnityEvent<uint>()</th>
+	</tr>
+	<tr>
+		<th>data</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>This object's data. </th>
+		<th></th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>Initialize</h3>
+
+<p><code>public void Initialize(uint id)</code></p>
+
+<p>Set the underlying ClatterObjectData. This must be called once in order for this object to generate audio.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>id</th>
+		<th>uint</th>
+		<th>This object's ID.</th>
+	</tr>
+</table>
+
+<h3>OnUpdate</h3>
+
+<p><code>public void OnUpdate()</code></p>
+
+<p>Refresh the recorded set of collisions. This method is not equivalent to Update() and is called automatically by <a href="ClatterManager.html"><code>ClatterManager</code></a>.</p>
+
+<h3>OnFixedUpdate</h3>
+
+<p><code>public void OnFixedUpdate()</code></p>
+
+<p>Update the directional and angular speeds of the underlying <a href="ClatterObjectData.html"><code>Clatter.Core.ClatterObjectData</code></a>. This method is not equivalent to FixedUpdate() and is called automatically by <a href="ClatterManager.html"><code>ClatterManager</code></a>.</p></div></div></div></body></html>

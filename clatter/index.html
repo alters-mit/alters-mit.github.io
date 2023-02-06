@@ -1,0 +1,138 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>Clatter</h1>
+<p><strong>Clatter is a C# library that can synthesize plausible sounds from physics-driven events.</strong> Given a collision, the mass of the two objects, their "audio materials", the relative velocity, and so on, Clatter will generate a unique sound. Currently, Clatter is capable of generating impact and scrape sounds.</p>
+<h2>Features</h2>
+<ul>
+<li>Unique and powerful audio synthesis capabilities. Unlike most physics driven audio generators, Clatter generates audio out of scientifically accurate, pre-computed data, rather than relying on modifying or mixing pre-existing audio files.</li>
+<li>Built-in support for Unity.</li>
+<li>Highly performant. Clatter uses efficient memory management and multithreaded processes to generate audio.</li>
+<li>An intuitive, flexible API.</li>
+</ul>
+<h2>You can use Clatter as:</h2>
+<ol>
+<li>An add-on in <a href="https://github.com/threedworld-mit/tdw">ThreeDWorld (TDW)</a>. <strong>If you are a TDW user, you do not need to read this documentation.</strong> For a lesson on Clatter in TDW, read <a href="https://github.com/threedworld-mit/tdw/blob/master/Documentation/lessons/audio/clatter.md">this</a>. For API documentation, read <a href="https://github.com/threedworld-mit/tdw/blob/master/Documentation/python/add_ons/clatter.md">this</a>.</li>
+<li><a href="clatter.core_overview.html">A C# library.</a> The <code>Clatter.Core.dll</code> library can accept object physics properties, collision speeds, etc. as inputs, and output raw wav data of generated audio or save the data as a .wav file.</li>
+<li><a href="clatter.unity_overview.html">A Unity plugin.</a> The <code>Clatter.Unity.dll</code> library includes helpful scripts that automatically listen for collision events and generate and play audio.</li>
+<li><a href="cli_overview.html">A command-line executable.</a></li>
+</ol>
+<h2>Roadmap</h2>
+<p>Clatter is currently in alpha. It is likely still buggy and unstable. The API will likely change often until the first stable release.</p>
+<ul>
+<li>We intend to support rolling sounds but this hasn't yet been implemented.</li>
+<li>Softer impact materials such as "fabric" don't sound as good as harder materials. This will be corrected in the near-future.</li>
+<li>Impacts tend to sound best for small objects. We're working on adding better support for larger objects.</li>
+<li>Some scrape materials may sound distorted or "scratchy". We'll fix these.</li>
+</ul>
+<h2>Attribution</h2>
+<p>Clatter was developed by Esther Alter.</p>
+<p>Clatter was originally a C# port of <a href="https://github.com/threedworld-mit/tdw/blob/master/Documentation/lessons/audio/py_impact.md">PyImpact</a>, a component of <a href="https://github.com/threedworld-mit/tdw">ThreeDWorld</a>, a research simulation platform. Clatter has since expanded upon the PyImpact's functionality.</p>
+<p>PyImpact was developed by James Traer, Maddie Cusimano, Josh McDermott, Vin Agarwal, and Esther Alter. When using Clatter for research, please cite <a href="http://dafx2019.bcu.ac.uk/papers/DAFx2019_paper_57.pdf">Traer,Cusimano  and McDermott, A perceptually inspired generative model of rigid-body  contact sounds, Digital Audio Effects, (DAFx), 2019</a> and <a href="http://mcdermottlab.mit.edu/bib2php/pubs/makeAbs.php?loc=agarwal21">Agarwal,  Cusimano, Traer, and McDermott, Object-based synthesis of scraping and  rolling sounds based on non-linear physical constraints, (DAFx), 2021</a>.</p>
+<p><code>@article {4500,
+    title = {A perceptually inspired generative model of rigid-body contact sounds},
+    journal = {Proceedings of the 22nd International Conference on Digital Audio Effects (DAFx-19)},
+    year = {2019},
+    month = {09/2019},
+    abstract = {&lt;p&gt;Contact between rigid-body objects produces a diversity of impact and friction sounds. These sounds can be synthesized with detailed simulations of the motion, vibration and sound radiation of the objects, but such synthesis is computationally expensive and prohibitively slow for many applications. Moreover, detailed physical simulations may not be necessary for perceptually compelling synthesis; humans infer ecologically relevant causes of sound, such as material categories, but not with arbitrary precision. We present a generative model of impact sounds which summarizes the effect of physical variables on acoustic features via statistical distributions fit to empirical measurements of object acoustics. Perceptual experiments show that sampling from these distributions allows efficient synthesis of realistic impact and scraping sounds that convey material, mass, and motion.&lt;/p&gt;
+},
+    author = {James Traer and Maddie Cusimano and Josh H. McDermott}
+}</code></p>
+<p><code>@inproceedings{agarwal21,
+     TITLE= "Object-based synthesis of scraping and rolling sounds based on non-linear physical constraints",
+     AUTHOR= "V Agarwal and M Cusimano and J Traer and J H McDermott",
+     booktitle= "The 24th International Conference on Digital Audio Effects (DAFx-21)",
+     MONTH= "September",
+     YEAR= 2021,
+     PDF-URL= "http://mcdermottlab.mit.edu/papers/Agarwal_etal_2021_scraping_rolling_synthesis_DAFx.pdf",
+}</code></p>
+<h2>Tools used to create this documentation</h2>
+<ul>
+<li><a href="https://www.doxygen.nl/manual/config.html">Doxygen</a></li>
+<li><a href="https://github.com/charlyllo/doctemplate">doctemplate</a></li>
+<li><a href="https://highlightjs.org">highlight.js</a></li>
+<li><a href="https://fonts.google.com/specimen/B612">B612</a></li>
+<li><a href="https://fonts.google.com/specimen/Fira+Mono">Fira Mono</a></li>
+</ul></div></div></div></body></html>

@@ -1,0 +1,347 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>ImpactMaterial</h1>
+
+<p class="subtitle">enum in Clatter.Core</p>
+
+<p>Audio materials for impact sounds. The integer suffix e.g. _2 is the "size bucket". To generate realistic audio, smaller objects should have smaller size bucket values. See <a href="ImpactMaterialData.html"><code>ImpactMaterialData</code></a> for various means of deriving the size bucket value.</p><table>
+	<tr>
+		<th><strong>Value</strong></th>
+	</tr>
+	<tr>
+		<th>ceramic_0</th>
+	</tr>
+	<tr>
+		<th>ceramic_1</th>
+	</tr>
+	<tr>
+		<th>ceramic_2</th>
+	</tr>
+	<tr>
+		<th>ceramic_3</th>
+	</tr>
+	<tr>
+		<th>ceramic_4</th>
+	</tr>
+	<tr>
+		<th>ceramic_5</th>
+	</tr>
+	<tr>
+		<th>glass_0</th>
+	</tr>
+	<tr>
+		<th>glass_1</th>
+	</tr>
+	<tr>
+		<th>glass_2</th>
+	</tr>
+	<tr>
+		<th>glass_3</th>
+	</tr>
+	<tr>
+		<th>glass_4</th>
+	</tr>
+	<tr>
+		<th>glass_5</th>
+	</tr>
+	<tr>
+		<th>metal_0</th>
+	</tr>
+	<tr>
+		<th>metal_1</th>
+	</tr>
+	<tr>
+		<th>metal_2</th>
+	</tr>
+	<tr>
+		<th>metal_3</th>
+	</tr>
+	<tr>
+		<th>metal_4</th>
+	</tr>
+	<tr>
+		<th>metal_5</th>
+	</tr>
+	<tr>
+		<th>wood_hard_0</th>
+	</tr>
+	<tr>
+		<th>wood_hard_1</th>
+	</tr>
+	<tr>
+		<th>wood_hard_2</th>
+	</tr>
+	<tr>
+		<th>wood_hard_3</th>
+	</tr>
+	<tr>
+		<th>wood_hard_4</th>
+	</tr>
+	<tr>
+		<th>wood_hard_5</th>
+	</tr>
+	<tr>
+		<th>wood_medium_0</th>
+	</tr>
+	<tr>
+		<th>wood_medium_1</th>
+	</tr>
+	<tr>
+		<th>wood_medium_2</th>
+	</tr>
+	<tr>
+		<th>wood_medium_3</th>
+	</tr>
+	<tr>
+		<th>wood_medium_4</th>
+	</tr>
+	<tr>
+		<th>wood_medium_5</th>
+	</tr>
+	<tr>
+		<th>wood_soft_0</th>
+	</tr>
+	<tr>
+		<th>wood_soft_1</th>
+	</tr>
+	<tr>
+		<th>wood_soft_2</th>
+	</tr>
+	<tr>
+		<th>wood_soft_3</th>
+	</tr>
+	<tr>
+		<th>wood_soft_4</th>
+	</tr>
+	<tr>
+		<th>wood_soft_5</th>
+	</tr>
+	<tr>
+		<th>cardboard_0</th>
+	</tr>
+	<tr>
+		<th>cardboard_1</th>
+	</tr>
+	<tr>
+		<th>cardboard_2</th>
+	</tr>
+	<tr>
+		<th>cardboard_3</th>
+	</tr>
+	<tr>
+		<th>cardboard_4</th>
+	</tr>
+	<tr>
+		<th>cardboard_5</th>
+	</tr>
+	<tr>
+		<th>paper_0</th>
+	</tr>
+	<tr>
+		<th>paper_1</th>
+	</tr>
+	<tr>
+		<th>paper_2</th>
+	</tr>
+	<tr>
+		<th>paper_3</th>
+	</tr>
+	<tr>
+		<th>paper_4</th>
+	</tr>
+	<tr>
+		<th>paper_5</th>
+	</tr>
+	<tr>
+		<th>plastic_hard_0</th>
+	</tr>
+	<tr>
+		<th>plastic_hard_1</th>
+	</tr>
+	<tr>
+		<th>plastic_hard_2</th>
+	</tr>
+	<tr>
+		<th>plastic_hard_3</th>
+	</tr>
+	<tr>
+		<th>plastic_hard_4</th>
+	</tr>
+	<tr>
+		<th>plastic_hard_5</th>
+	</tr>
+	<tr>
+		<th>plastic_soft_foam_0</th>
+	</tr>
+	<tr>
+		<th>plastic_soft_foam_1</th>
+	</tr>
+	<tr>
+		<th>plastic_soft_foam_2</th>
+	</tr>
+	<tr>
+		<th>plastic_soft_foam_3</th>
+	</tr>
+	<tr>
+		<th>plastic_soft_foam_4</th>
+	</tr>
+	<tr>
+		<th>plastic_soft_foam_5</th>
+	</tr>
+	<tr>
+		<th>rubber_0</th>
+	</tr>
+	<tr>
+		<th>rubber_1</th>
+	</tr>
+	<tr>
+		<th>rubber_2</th>
+	</tr>
+	<tr>
+		<th>rubber_3</th>
+	</tr>
+	<tr>
+		<th>rubber_4</th>
+	</tr>
+	<tr>
+		<th>rubber_5</th>
+	</tr>
+	<tr>
+		<th>fabric_0</th>
+	</tr>
+	<tr>
+		<th>fabric_1</th>
+	</tr>
+	<tr>
+		<th>fabric_2</th>
+	</tr>
+	<tr>
+		<th>fabric_3</th>
+	</tr>
+	<tr>
+		<th>fabric_4</th>
+	</tr>
+	<tr>
+		<th>fabric_5</th>
+	</tr>
+	<tr>
+		<th>leather_0</th>
+	</tr>
+	<tr>
+		<th>leather_1</th>
+	</tr>
+	<tr>
+		<th>leather_2</th>
+	</tr>
+	<tr>
+		<th>leather_3</th>
+	</tr>
+	<tr>
+		<th>leather_4</th>
+	</tr>
+	<tr>
+		<th>leather_5</th>
+	</tr>
+	<tr>
+		<th>stone_0</th>
+	</tr>
+	<tr>
+		<th>stone_1</th>
+	</tr>
+	<tr>
+		<th>stone_2</th>
+	</tr>
+	<tr>
+		<th>stone_3</th>
+	</tr>
+	<tr>
+		<th>stone_4</th>
+	</tr>
+	<tr>
+		<th>stone_5</th>
+	</tr>
+
+</table></div></div></div></body></html>

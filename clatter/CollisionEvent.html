@@ -1,0 +1,233 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>CollisionEvent</h1>
+
+<p class="subtitle">struct in Clatter.Core</p>
+
+<p>A CollisionEvent stores collision data, which will later be converted into audio data.</p>
+<p>Typically, a CollisionEvent is used in the background to convert physics collision data into an audio event. If you want to generate audio outside of a physics-driven simulation context, you don't need to use CollisionEvents.</p><h2>Fields</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Default Value</strong></th>
+	</tr>
+	<tr>
+		<th>primary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The primary object. This should always be the faster-moving object.  Readonly.</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>secondary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The secondary object. This should always be the slower-moving (or non-moving) object.  Readonly.</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>ids</th>
+		<th>ulong</th>
+		<th>The combined object IDs pair as a ulong. This is used by <a href="AudioGenerator.html"><code>AudioGenerator</code></a> as a dictionary key.  Readonly.</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>type</th>
+		<th><a href="AudioEventType.html"><code>AudioEventType</code></a></th>
+		<th>The type of the audio event (impact, scrape, roll, none).  Readonly.</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>position</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The position of the collision.  Readonly.</th>
+		<th></th>
+	</tr>
+	<tr>
+		<th>speed</th>
+		<th>double</th>
+		<th>The speed of the collision in meters per second.  Readonly.</th>
+		<th></th>
+	</tr>
+</table>
+
+<h2>Static Methods</h2>
+
+<h3>GetIds</h3>
+
+<p><code>public static ulong GetIds(ClatterObjectData primary, ClatterObjectData secondary)</code></p>
+
+<p>Returns an object ID pair as a ulong. Source: <a href="https://stackoverflow.com/a/827267">827267</a></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>primary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The primary object.</th>
+	</tr>	<tr>
+		<th>secondary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The secondary object.</th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>CollisionEvent</h3>
+
+<p><code>public CollisionEvent(ClatterObjectData primary, ClatterObjectData secondary, AudioEventType type, double speed, Vector3d position)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>primary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The primary object.</th>
+	</tr>	<tr>
+		<th>secondary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The secondary object.</th>
+	</tr>	<tr>
+		<th>type</th>
+		<th><a href="AudioEventType.html"><code>AudioEventType</code></a></th>
+		<th>The type of the audio event (impact, scrape, roll, none).</th>
+	</tr>	<tr>
+		<th>speed</th>
+		<th>double</th>
+		<th>The speed of the collision in meters per second.</th>
+	</tr>	<tr>
+		<th>position</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The position of the collision.</th>
+	</tr>
+</table>
+
+<h3>CollisionEvent</h3>
+
+<p><code>public CollisionEvent(ulong ids, ClatterObjectData primary, ClatterObjectData secondary, AudioEventType type, double speed, Vector3d position)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>ids</th>
+		<th>ulong</th>
+		<th>The object IDs pair.</th>
+	</tr>	<tr>
+		<th>primary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The primary object.</th>
+	</tr>	<tr>
+		<th>secondary</th>
+		<th><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a></th>
+		<th>The secondary object in meters per second.</th>
+	</tr>	<tr>
+		<th>type</th>
+		<th><a href="AudioEventType.html"><code>AudioEventType</code></a></th>
+		<th>The type of the audio event (impact, scrape, roll, none).</th>
+	</tr>	<tr>
+		<th>speed</th>
+		<th>double</th>
+		<th>The speed of the collision in meters per second.</th>
+	</tr>	<tr>
+		<th>position</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The position of the collision.</th>
+	</tr>
+</table></div></div></div></body></html>

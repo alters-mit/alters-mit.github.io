@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>Clatter.Core</h1>
+<p><code>Clatter.Core</code> is the core library for Clatter. It can be used both in a Unity and non-Unity context.</p>
+
+
+<p><strong>Download:</strong></p>
+
+<p><a href="https://github.com/alters-mit/clatter/releases/download/0.1.0/Clatter.Core.dll">Clatter.Core.dll</a></p>
+<p>New users should start by reading:</p>
+<ul>
+<li><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a> Audio data for a Clatter object.</li>
+<li><a href="CollisionEvent.html"><code>CollisionEvent</code></a> A struct for storing collision data.</li>
+<li><a href="AudioGenerator.html"><code>AudioGenerator</code></a> Generate audio within a dynamic physics simulation.</li>
+<li><a href="WavWriter.html"><code>WavWriter</code></a> Write audio samples to a .wav file.</li>
+</ul>
+<p>To create audio in Clatter, you typically need to declare at least 2 <a href="AudioObjectData.html"><code>AudioObjectData</code></a> objects, at least 1 <a href="CollisionEvent.html"><code>CollisionEvent</code></a>, and an <a href="AudioGenerator.html"><code>AudioGenerator</code></a>. The <code>AudioGenerator</code> reads the <code>CollisionEvent</code> and generates audio. In programs where speed is not important and you just want to generate simple wav files, you can optionally generate audio by declaring a new <a href="Impact.html"><code>Impact</code></a> or <a href="Scrape.html"><code>Scrape</code></a> instead of an <code>AudioGenerator</code>.</p>
+<p><code>Clatter.Core</code> <em>can</em> be used in Unity as-is, but it's usually much easier to use <a href="clatter.unity.html"><code>Clatter.Unity</code></a>. <code>Clatter.Core</code> doesn't have any MonoBehaviour subclasses, meaning that nothing will update on Update(), Awake(), etc.</p></div></div></div></body></html>

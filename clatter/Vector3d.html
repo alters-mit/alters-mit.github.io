@@ -1,0 +1,441 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clatter</title>
+    <meta name="description" content="Clatter API Documentation">
+    <meta name="author" content="Esther Alter">
+
+    <link rel="stylesheet" href="style.css?">
+    <script src="highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+
+<body>
+
+    <div class="navbar clear nav-top">
+        <div class="row content">
+            <p>Clatter API </p>
+            <p><a class="right" href="https://github.com/alters-mit/clatter">GitHub Repo</a></p>
+        </div>
+    </div>
+
+    <div class="container clear">
+        <div class="row wrapper">		<div class="sidepanel">
+				<a class="title" href="index.html">Overview</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.core_overview.html">Clatter.Core</a>
+
+				<a class="section" href="AudioEvent.html">AudioEvent</a>
+				<a class="section" href="AudioEventType.html">AudioEventType</a>
+				<a class="section" href="AudioGenerator.html">AudioGenerator</a>
+				<a class="section" href="ClatterObjectData.html">ClatterObjectData</a>
+				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
+				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
+				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="Globals.html">Globals</a>
+				<a class="section" href="Impact.html">Impact</a>
+				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
+				<a class="section" href="ImpactMaterialData.html">ImpactMaterialData</a>
+				<a class="section" href="ImpactMaterialUnsized.html">ImpactMaterialUnsized</a>
+				<a class="section" href="LinSpace.html">LinSpace</a>
+				<a class="section" href="Loader.html">Loader</a>
+				<a class="section" href="MedianFilter.html">MedianFilter</a>
+				<a class="section" href="Modes.html">Modes</a>
+				<a class="section" href="NormalDistribution.html">NormalDistribution</a>
+				<a class="section" href="Samples.html">Samples</a>
+				<a class="section" href="Scrape.html">Scrape</a>
+				<a class="section" href="ScrapeMaterial.html">ScrapeMaterial</a>
+				<a class="section" href="ScrapeMaterialData.html">ScrapeMaterialData</a>
+				<a class="section" href="ShortExtensions.html">ShortExtensions</a>
+				<a class="section" href="Vector3d.html">Vector3d</a>
+				<a class="section" href="WavWriter.html">WavWriter</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="clatter.unity_overview.html">Clatter.Unity</a>
+
+				<a class="section" href="ClatterManager.html">ClatterManager</a>
+				<a class="section" href="ClatterObject.html">ClatterObject</a>
+				<a class="section" href="ImpactSound.html">ImpactSound</a>
+				<a class="section" href="MassMode.html">MassMode</a>
+				<a class="section" href="PhysicMaterialMode.html">PhysicMaterialMode</a>
+				<a class="section" href="ScrapeSound.html">ScrapeSound</a>
+				<a class="section" href="Sound.html">Sound</a>
+				<a class="section" href="Vector3dExtensions.html">Vector3dExtensions</a>
+
+				<div class="divider left"></div>
+
+				<a class="title" href="cli_overview.html">Clatter CLI</a>
+
+
+				<div class="divider left"></div>
+
+				<a class="title" href="benchmark.html">Benchmark</a>
+			</div>
+		<div class="right-col">
+
+<h1>Vector3d</h1>
+
+<p class="subtitle">struct in Clatter.Core</p>
+
+<p>A partial implementation of a non-Unity Vector3 that uses doubles. Source: <a href="https://github.com/sldsmkd/vector3d/blob/master/Vector3d.cs">Vector3d.cs</a></p><h2>Properties</h2>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+		<th><strong>Get/Set</strong></th>
+	</tr>
+	<tr>
+		<th>X</th>
+		<th>double</th>
+		<th>The x coordinate. </th>
+		<th>get set</th>
+	</tr>
+	<tr>
+		<th>Y</th>
+		<th>double</th>
+		<th>The y coordinate. </th>
+		<th>get set</th>
+	</tr>
+	<tr>
+		<th>Z</th>
+		<th>double</th>
+		<th>The z coordinate. </th>
+		<th>get set</th>
+	</tr>
+	<tr>
+		<th>Magnitude</th>
+		<th>double</th>
+		<th>The magnitude of the vector. </th>
+		<th>get</th>
+	</tr>
+	<tr>
+		<th>SqrMagnitude</th>
+		<th>double</th>
+		<th>The square root magnitude. </th>
+		<th>get</th>
+	</tr>
+	<tr>
+		<th>Zero</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>Vector (0, 0, 0). </th>
+		<th>get</th>
+	</tr>
+
+</table>
+
+<h2>Static Methods</h2>
+
+<h3>Distance</h3>
+
+<p><code>public static double Distance(Vector3d a, Vector3d b)</code></p>
+
+<p>Returns the distance between two vectors.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The first vector.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The second vector.</th>
+	</tr>
+</table>
+
+<h3>operator+</h3>
+
+<p><code>public static void operator+(Vector3d a, Vector3d b)</code></p>
+
+<p>Vector addition.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The first vector.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The second vector.</th>
+	</tr>
+</table>
+
+<h3>operator-</h3>
+
+<p><code>public static void operator-(Vector3d a, Vector3d b)</code></p>
+
+<p>Vector subtraction.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The first vector.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The second vector.</th>
+	</tr>
+</table>
+
+<h3>operator-</h3>
+
+<p><code>public static void operator-(Vector3d v)</code></p>
+
+<p>Vector negation.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>v</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The vector.</th>
+	</tr>
+</table>
+
+<h3>operator*</h3>
+
+<p><code>public static void operator*(Vector3d v, double d)</code></p>
+
+<p>Vector multiplication.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>v</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The vector.</th>
+	</tr>	<tr>
+		<th>d</th>
+		<th>double</th>
+		<th>The scalar.</th>
+	</tr>
+</table>
+
+<h3>operator*</h3>
+
+<p><code>public static void operator*(double d, Vector3d v)</code></p>
+
+<p>Vector multiplication.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>d</th>
+		<th>double</th>
+		<th>The scalar.</th>
+	</tr>	<tr>
+		<th>v</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The vector.</th>
+	</tr>
+</table>
+
+<h3>operator/</h3>
+
+<p><code>public static void operator/(Vector3d v, double d)</code></p>
+
+<p>Vector division.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>v</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The vector.</th>
+	</tr>	<tr>
+		<th>d</th>
+		<th>double</th>
+		<th>The scalar.</th>
+	</tr>
+</table>
+
+<h3>operator==</h3>
+
+<p><code>public static bool operator==(Vector3d a, Vector3d b)</code></p>
+
+<p>Vector equality.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The first vector.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The second vector.</th>
+	</tr>
+</table>
+
+<h3>operator!=</h3>
+
+<p><code>public static bool operator!=(Vector3d a, Vector3d b)</code></p>
+
+<p>Vector inequality.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>a</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The first vector.</th>
+	</tr>	<tr>
+		<th>b</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The second vector.</th>
+	</tr>
+</table>
+
+<h2>Methods</h2>
+
+<h3>Vector3d</h3>
+
+<p><code>public Vector3d(double x, double y, double z)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>x</th>
+		<th>double</th>
+		<th>The x coordinate.</th>
+	</tr>	<tr>
+		<th>y</th>
+		<th>double</th>
+		<th>The y coordinate.</th>
+	</tr>	<tr>
+		<th>z</th>
+		<th>double</th>
+		<th>The z coordinate.</th>
+	</tr>
+</table>
+
+<h3>Vector3d</h3>
+
+<p><code>public Vector3d(double[] vector)</code></p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>vector</th>
+		<th>double[]</th>
+		<th>The vector. We assume this has exactly 3 elements.</th>
+	</tr>
+</table>
+
+<h3>ToString</h3>
+
+<p><code>public override string ToString()</code></p>
+
+<p>Stringifies this vector.</p>
+
+<h3>Normalize</h3>
+
+<p><code>public void Normalize()</code></p>
+
+<p>Normalize this vector.</p>
+
+<h3>CopyTo</h3>
+
+<p><code>public void CopyTo(Vector3d v)</code></p>
+
+<p>Copy another Vector3d into this one. This is faster than using the = operator to set a new value.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>v</th>
+		<th><a href="Vector3d.html"><code>Vector3d</code></a></th>
+		<th>The other Vector3d.</th>
+	</tr>
+</table>
+
+<h3>Equals</h3>
+
+<p><code>public override bool Equals(object other)</code></p>
+
+<p>Equality comparison.</p>
+
+<table>
+	<tr>
+		<th><strong>Name</strong></th><th>
+		<strong>Type</strong></th>
+		<th><strong>Description</strong></th>
+	</tr>
+	<tr>
+		<th>other</th>
+		<th>object</th>
+		<th>The other object.</th>
+	</tr>
+</table>
+
+<h3>GetHashCode</h3>
+
+<p><code>public override int GetHashCode()</code></p>
+
+<p>Returns the hashcode.</p></div></div></div></body></html>
