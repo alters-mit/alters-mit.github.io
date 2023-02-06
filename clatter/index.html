@@ -85,6 +85,8 @@
 
 <h1>Clatter</h1>
 <p><strong>Clatter is a C# library that can synthesize plausible sounds from physics-driven events.</strong> Given a collision, the mass of the two objects, their "audio materials", the relative velocity, and so on, Clatter will generate a unique sound. Currently, Clatter is capable of generating impact and scrape sounds.</p>
+<div class="video-container"><iframe class="video" src="https://www.youtube.com/embed/9Xg6mdddQLQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+
 <h2>Features</h2>
 <ul>
 <li>Unique and powerful audio synthesis capabilities. Unlike most physics driven audio generators, Clatter generates audio out of scientifically accurate, pre-computed data, rather than relying on modifying or mixing pre-existing audio files.</li>
@@ -94,10 +96,10 @@
 </ul>
 <h2>You can use Clatter as:</h2>
 <ol>
-<li>An add-on in <a href="https://github.com/threedworld-mit/tdw">ThreeDWorld (TDW)</a>. <strong>If you are a TDW user, you do not need to read this documentation.</strong> For a lesson on Clatter in TDW, read <a href="https://github.com/threedworld-mit/tdw/blob/master/Documentation/lessons/audio/clatter.md">this</a>. For API documentation, read <a href="https://github.com/threedworld-mit/tdw/blob/master/Documentation/python/add_ons/clatter.md">this</a>.</li>
+<li>An add-on in <a href="https://github.com/threedworld-mit/tdw">ThreeDWorld (TDW)</a>. If you are a TDW user, read <a href="https://github.com/threedworld-mit/tdw/blob/master/Documentation/lessons/clatter/overview.md">the TDW-specific documentation for Clatter</a> instead of this website. You shouldn't need to understand the Clatter C# API unless you intend to contribute to it.</li>
 <li><a href="clatter.core_overview.html">A C# library.</a> The <code>Clatter.Core.dll</code> library can accept object physics properties, collision speeds, etc. as inputs, and output raw wav data of generated audio or save the data as a .wav file.</li>
 <li><a href="clatter.unity_overview.html">A Unity plugin.</a> The <code>Clatter.Unity.dll</code> library includes helpful scripts that automatically listen for collision events and generate and play audio.</li>
-<li><a href="cli_overview.html">A command-line executable.</a></li>
+<li><a href="cli_overview.html">A command-line executable.</a> This executable can generate .wav files.</li>
 </ol>
 <h2>Roadmap</h2>
 <p>Clatter is currently in alpha. It is likely still buggy and unstable. The API will likely change often until the first stable release.</p>
