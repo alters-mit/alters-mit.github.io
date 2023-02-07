@@ -546,18 +546,25 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
     .right-col h2 {
         font-size: 2.5vh;
     }
-    .right-col p {
-        font-size: 16px;
-    }
-    .right-col li p {
-        font-size: 16px;
-        margin-bottom: 16px;
-    }
     .video-container {
         width: 100%;
         padding-bottom: 50%;
     }
     .right-col li {
         font-size: 16px;
+    }
+
+    /* https://www.koichihori.tech/pre_code_for_mobile_en.html */
+    .right-col p code
+    {
+        white-space:pre-wrap;
+        word-wrap:break-word;
+        overflow:auto;
+    }
+    pre code.hljs
+    {
+        white-space:pre-wrap;
+        word-wrap:break-word;
+        overflow:auto;
     }
 }
