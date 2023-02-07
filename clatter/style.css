@@ -36,56 +36,32 @@ body {
 
 h1 {
     font-family: 'B612-Bold', serif;
-    font-size: 64px;
-    line-height: 42px;
-    margin-bottom: 50px;
-
 }
 
 h2 {
     font-family: 'B612-Bold', serif;
-    font-size: 36px;
-    line-height: 30px;
-    text-align: center;
-    color: #333;
-    margin-block-start: 40px;
-    margin-block-end: 30px;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
-
-p {
-    font-size: 20px;
-    line-height: 26px;
 }
 
 a {
     color: #E30B5C;
 }
 
-th {
-    font-family: 'B612-Regular', sans-serif;
-    color: #333;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
 code {
     font-family: 'Fira', serif;
 }
 
+
 .navbar {
     overflow: hidden;
-    background-color: #E30B5C;
-    color: #333;
     top: 0;
     width: 100%;
     height: 70px;
-    font-size: 15px;
     position: fixed;
     z-index: 1;
+}
+
+.navbar p {
+    font-size: 16px;
 }
 
 .navbar a {
@@ -118,16 +94,6 @@ code {
     border-bottom: 2px solid #E30B5C;
 }
 
-.row {
-    max-width: 100rem;
-    margin: auto;
-    display: block;
-}
-
-.content {
-    padding: 22px;
-}
-
 .wrapper {
     display: flex;
     padding: 22px;
@@ -140,6 +106,123 @@ code {
     overflow-x: hidden;
     position: fixed;
     height: 80%;
+}
+
+@media only screen and (max-aspect-ratio: 99 / 100)
+{
+   /* https://codepen.io/alvarotrigo/pen/wvrzPWL */
+.navbar .menu-items {
+  display: flex;
+}
+.navbar .nav-container li {
+  list-style: none;
+}
+.navbar .nav-container a:hover{
+    font-weight: bolder;
+}
+.nav-container {
+  display: block;
+  position: fixed;
+  height: 100%;
+            overflow-x: auto;
+    overflow-y: auto;
+}
+.nav-container .checkbox {
+  position: absolute;
+  display: block;
+  height: 32px;
+  width: 32px;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  opacity: 0;
+  cursor: pointer;
+}
+.nav-container .hamburger-lines {
+  height: 26px;
+  width: 32px;
+  position: absolute;
+  top: 17px;
+  left: 20px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.nav-container .hamburger-lines .line {
+  display: block;
+  height: 4px;
+  width: 100%;
+  border-radius: 10px;
+  background: #0e2431;
+}
+.nav-container .hamburger-lines .line1 {
+  transform-origin: 0% 0%;
+  transition: transform 0.4s ease-in-out;
+}
+.nav-container .hamburger-lines .line2 {
+  transition: transform 0.2s ease-in-out;
+}
+.nav-container .hamburger-lines .line3 {
+  transform-origin: 0% 100%;
+  transition: transform 0.4s ease-in-out;
+}
+.navbar .menu-items {
+  padding-top: 6vh;
+    padding-left: 1vw;
+    padding-bottom: 6vh;
+  box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+  height: 100%;
+  width: 100%;
+  transform: translate(-150%);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease-in-out;
+  text-align: left;
+    background-color: #eee;
+        overflow-x: auto;
+    overflow-y: auto;
+}
+.navbar .menu-items li {
+  margin-bottom: 1.2rem;
+  font-size: 16px;
+    margin-left: 40px;
+}
+.navbar .menu-items li a
+{
+        color: #E30B5C;
+}
+
+.nav-container input[type="checkbox"]:checked ~ .menu-items {
+  transform: translateX(0);
+}
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+  transform: rotate(45deg);
+}
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+  transform: scaleY(0);
+}
+.nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+  transform: rotate(-45deg);
+}
+.nav-container input[type="checkbox"]:checked ~ .logo{
+  display: none;
+}
+.sidepanel{
+    display: none;
+}
+.divider-menu {
+        width: 40px;
+        height: 2px;
+        background: #666666;
+        border-radius: 30px;
+    }
+}
+@media only screen and (min-aspect-ratio: 1 / 1)
+{
+    .nav-container{
+        display: none;
+    }
 }
 
 .sidepanel a.title {
@@ -179,18 +262,6 @@ code {
     text-decoration: underline;
 }
 
-.main-col {
-    width: 100%;
-    margin: auto;
-    text-align: center;
-}
-
-.main-col p {
-    font-size: 15px;
-    line-height: 24px;
-    margin-bottom: 36px;
-}
-
 .right-col {
     margin-top: 9%;
     text-align: left;
@@ -224,6 +295,7 @@ code {
     border-collapse: collapse;
     font-family: 'B612-Regular', sans-serif;
 }
+
 .right-col td, th {
   border: 1px solid #ddd;
   padding: 8px;
@@ -371,10 +443,6 @@ code {
 /* Extra small-small devices (phones, 420px and down) */
 @media only screen and (max-width: 420px) {
 
-    .logo {
-        width: 100px;
-    }
-
     .navbar {
         height: auto;
     }
@@ -394,14 +462,8 @@ code {
 /* Extra small devices (phones, 650px and down) */
 @media only screen and (max-width: 650px) {
 
-    .logo {
-        width: 115px;
-        margin: -10px 0px;
-    }
-
     .navbar a {
         padding-bottom: 5px;
-        margin-left: 40px;
         margin-right: 0;
     }
 
@@ -435,12 +497,6 @@ code {
     .left {
         margin: 20px auto;
     }
-
-    .right-col {
-        position: relative;
-        margin-top: 20px;
-        margin-left: 0px;
-    }
 }
 
 /* Source: https://highlightjs.org/usage/ */
@@ -462,13 +518,51 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
 
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) .logo {
-    margin: -10px 0px;
+/* End Break Points */
+
+
+.navbar-row {
+    max-width: 100rem;
+    margin: auto;
+    display: block;
+        padding: 22px;
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
+@media only screen and (max-aspect-ratio: 99 / 100)
+{
+    .navbar-row{
+        display: none;
+    }
+    /* https://stackoverflow.com/a/30423904 */
+    table{
+        display: block;
+        overflow-x: auto;
+    }
 
-
-/* End Break Points */
+    .right-col {
+        width: 100%;
+    margin-left: 1%;
+        margin-right: 1%;
+    }
+    .right-col h1 {
+        font-size: 3vh;
+        padding-top: 4%;
+    }
+    .right-col h2 {
+        font-size: 2.5vh;
+    }
+    .right-col p {
+        font-size: 16px;
+    }
+    .right-col li p {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+    .video-container {
+        width: 100%;
+        padding-bottom: 50%;
+    }
+    .right-col li {
+        font-size: 16px;
+    }
+}
