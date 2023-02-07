@@ -557,9 +557,7 @@ pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5p
     /* https://www.koichihori.tech/pre_code_for_mobile_en.html */
     .right-col p code
     {
-        white-space:pre-wrap;
         word-wrap:break-word;
-        overflow:auto;
     }
     pre code.hljs
     {
