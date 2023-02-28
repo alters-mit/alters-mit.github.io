@@ -43,6 +43,7 @@
                 <li><a href="CollisionEvent.html">CollisionEvent</a></li>
                 <li><a href="DoubleExtensions.html">DoubleExtensions</a></li>
                 <li><a href="EventState.html">EventState</a></li>
+                <li><a href="ExternalEntryPoint.html">ExternalEntryPoint</a></li>
                 <li><a href="Globals.html">Globals</a></li>
                 <li><a href="Impact.html">Impact</a></li>
                 <li><a href="ImpactMaterial.html">ImpactMaterial</a></li>
@@ -94,6 +95,7 @@
 				<a class="section" href="CollisionEvent.html">CollisionEvent</a>
 				<a class="section" href="DoubleExtensions.html">DoubleExtensions</a>
 				<a class="section" href="EventState.html">EventState</a>
+				<a class="section" href="ExternalEntryPoint.html">ExternalEntryPoint</a>
 				<a class="section" href="Globals.html">Globals</a>
 				<a class="section" href="Impact.html">Impact</a>
 				<a class="section" href="ImpactMaterial.html">ImpactMaterial</a>
@@ -142,13 +144,14 @@
 
 <p><strong>Download:</strong></p>
 
-<p><a href="https://github.com/alters-mit/clatter/releases/download/0.1.0/Clatter.Core.dll">Clatter.Core.dll</a></p>
+<p><a href="https://github.com/alters-mit/clatter/releases/download/0.1.1/Clatter.Core.dll">Clatter.Core.dll</a></p>
 <p>New users should start by reading:</p>
 <ul>
 <li><a href="ClatterObjectData.html"><code>ClatterObjectData</code></a> Audio data for a Clatter object.</li>
 <li><a href="CollisionEvent.html"><code>CollisionEvent</code></a> A struct for storing collision data.</li>
 <li><a href="AudioGenerator.html"><code>AudioGenerator</code></a> Generate audio within a dynamic physics simulation.</li>
 <li><a href="WavWriter.html"><code>WavWriter</code></a> Write audio samples to a .wav file.</li>
+<li><a href="ExternalEntryPoint.html"><code>ExternalEntryPoint</code></a> A convenient entry point for non-C# applications. If your project is in Unity/C#, you should ignore this class.</li>
 </ul>
 <p>To create audio in Clatter, you typically need to declare at least 2 <a href="AudioObjectData.html"><code>AudioObjectData</code></a> objects, at least 1 <a href="CollisionEvent.html"><code>CollisionEvent</code></a>, and an <a href="AudioGenerator.html"><code>AudioGenerator</code></a>. The <code>AudioGenerator</code> reads the <code>CollisionEvent</code> and generates audio. In programs where speed is not important and you just want to generate simple wav files, you can optionally generate audio by declaring a new <a href="Impact.html"><code>Impact</code></a> or <a href="Scrape.html"><code>Scrape</code></a> instead of an <code>AudioGenerator</code>.</p>
 <p><code>Clatter.Core</code> <em>can</em> be used in Unity as-is, but it's usually much easier to use <a href="clatter.unity.html"><code>Clatter.Unity</code></a>. <code>Clatter.Core</code> doesn't have any MonoBehaviour subclasses, meaning that nothing will update on Update(), Awake(), etc.</p></div></div></div></body></html>
