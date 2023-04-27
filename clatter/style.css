@@ -178,12 +178,12 @@ code {
         overflow-x: auto;
     overflow-y: auto;
 }
-.navbar .menu-items li {
+.navbar .menu-items p {
   margin-bottom: 1.2rem;
   font-size: 16px;
     margin-left: 40px;
 }
-.navbar .menu-items li a
+.navbar .menu-items p a
 {
         color: #E30B5C;
 }
