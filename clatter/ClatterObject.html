@@ -145,8 +145,8 @@
 <p class="subtitle">Inherits from <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"><code>MonoBehaviour</code></a></p>
 
 <p>A ClatterObject is a MonoBehaviour class wrapper for <a href="ClatterObjectData.html"><code>Clatter.Core.ClatterObjectData</code></a> that automatically converts Unity PhysX collisions into Clatter audio.</p>
-<p>A ClatterObject must have either a Rigidbody or ArticulationBody component and at least one Collider.</p>
 
+<p><p>A ClatterObject must have either a Rigidbody or ArticulationBody component and at least one Collider.</p></p>
 <p>ClatterObjects are automatically initialized and updated by <a href="ClatterManager.html"><code>ClatterManager</code></a>; you can use a ClatterObject without <a href="ClatterManager.html"><code>ClatterManager</code></a> but it's very difficult to do so. Notice that there is no Update or FixedUpdate call because it's assumed that <a href="ClatterManager.html"><code>ClatterManager</code></a> will call ClatterObject.OnUpdate() and ClatterObject.OnFixedUpdate().</p>
 
 <p>ClatterObject listens for Unity collision events (enter, stay, exit) and converts them into <a href="CollisionEvent.html"><code>Clatter.Core.CollisionEvent</code></a> data objects:</p>
