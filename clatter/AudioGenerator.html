@@ -143,8 +143,8 @@
 <p class="subtitle">class in Clatter.Core</p>
 
 <p>An AudioGenerator can generate audio within a dynamic physics simulation.</p>
+<p>AudioGenerator is not required for audio generation but is usually your best option, for two reasons. First, AudioGenerator automatically converts <a href="CollisionEvent.html"><code>CollisionEvent</code></a> data into audio data, meaning that it's suitable for physics simulation. Second, AudioGenerator is multi-threaded, meaning that concurrent audio generation is very fast.</p>
 
-<p><p>AudioGenerator is not required for audio generation but is usually your best option, for two reasons. First, AudioGenerator automatically converts <a href="CollisionEvent.html"><code>CollisionEvent</code></a> data into audio data, meaning that it's suitable for physics simulation. Second, AudioGenerator is multi-threaded, meaning that concurrent audio generation is very fast.</p></p>
 <p>AudioGenerator is structured like a UnityEngine MonoBehaviour object but it isn't a subclass of MonoBehaviour and won't update like one; Update() needs to be called manually.</p>
 
 <p>Regarding randomness: AudioGenerator has an rng parameter that is a System.Random object. In Clatter, audio is generated from both fixed values and random values; see the constructor for <a href="Modes.html"><code>Modes</code></a> and <a href="Modes.html"><code>Modes</code></a>.AdjustPowers(). In most cases, you'll want the audio to be truly random. If you want to replicate the exact same audio every time you run your program, set a random seed: Random rng = new Random(0).</p><h2>Static Fields</h2>

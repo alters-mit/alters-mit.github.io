@@ -145,8 +145,8 @@
 <p class="subtitle">Inherits from <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html"><code>MonoBehaviour</code></a></p>
 
 <p>Singleton manager class for Clatter in Unity. To initialize Clatter in Unity, you must add a ClatterManager to the scene, at least two GameObjects with an <a href="ClatterObject.html"><code>ClatterObject</code></a> component, and an AudioListener.</p>
+<p>Internally, ClatterManager stores data for each <a href="ClatterObject.html"><code>ClatterObject</code></a> in the scene and has a <a href="AudioGenerator.html"><code>Clatter.Core.AudioGenerator</code></a>. When a collision occurs between two <a href="ClatterObject.html"><code>ClatterObject</code></a> components, the collision will be converted into a <a href="CollisionEvent.html"><code>Clatter.Core.CollisionEvent</code></a> and announced to the ClatterManager, which will in turn feed it to the AudioGenerator (see AudioGenerator.AddCollision(collisionEvent)). ClatterManager then converts the generated audio into <a href="ImpactSound.html"><code>ImpactSound</code></a> or <a href="ScrapeSound.html"><code>ScrapeSound</code></a> components, which will play the sound and then self-destruct.</p>
 
-<p><p>Internally, ClatterManager stores data for each <a href="ClatterObject.html"><code>ClatterObject</code></a> in the scene and has a <a href="AudioGenerator.html"><code>Clatter.Core.AudioGenerator</code></a>. When a collision occurs between two <a href="ClatterObject.html"><code>ClatterObject</code></a> components, the collision will be converted into a <a href="CollisionEvent.html"><code>Clatter.Core.CollisionEvent</code></a> and announced to the ClatterManager, which will in turn feed it to the AudioGenerator (see AudioGenerator.AddCollision(collisionEvent)). ClatterManager then converts the generated audio into <a href="ImpactSound.html"><code>ImpactSound</code></a> or <a href="ScrapeSound.html"><code>ScrapeSound</code></a> components, which will play the sound and then self-destruct.</p></p>
 <p>ClatterManager can automatically update like any other MonoBehaviour class i.e. via Update() and FixedUpdate(). It might be convenient, especially to handle potential script execution order bugs, to manually update ClatterManager instead by setting auto == false. Either way, ClatterManager will call <a href="ClatterObject.html"><code>ClatterObject</code></a>.Initialize(id) and <a href="ClatterObject.html"><code>ClatterObject</code></a>.OnFixedUpdate() for each <a href="ClatterObject.html"><code>ClatterObject</code></a> in the scene.</p>
 
 <p>In Clatter, audio is generated from both fixed values and random values; see the constructor for <a href="Modes.html"><code>Clatter.Core.Modes</code></a> and Modes.AdjustPowers(). In most cases, you'll want the audio to be truly random. If you want to replicate the exact same audio every time you run your program, uncheck "Generate Random Seed" and then enter a seed.</p>
@@ -166,6 +166,18 @@
 		<th>Singleton instance. </th>
 		<th></th>
 	</tr>
+	<tr>
+		<th>auto</th>
+		<th>bool</th>
+		<th>If true, automatically update by calling Awake(), Update(), and FixedUpdate() (like an ordinary MonoBehaviour object). If this is false, you must manually update instead by calling instance.Awake(), instance.OnUpdate(), and instance.OnFixedUpdate(). </th>
+		<th>true</th>
+	</tr>
+	<tr>
+		<th>adjustAudioSettings</th>
+		<th>bool</th>
+		<th>If true, adjust the global audio settings for better-quality audio. </th>
+		<th>true</th>
+	</tr>
 </table>
 
 <h2>Fields</h2>
@@ -178,12 +190,6 @@
 		<th><strong>Default Value</strong></th>
 	</tr>
 	<tr>
-		<th>auto</th>
-		<th>bool</th>
-		<th>If true, automatically update by calling Awake(), Update(), and FixedUpdate() (like an ordinary MonoBehaviour object). If this is false, you must manually update instead by calling instance.Awake(), instance.OnUpdate(), and instance.OnFixedUpdate(). </th>
-		<th>true</th>
-	</tr>
-	<tr>
 		<th>generateRandomSeed</th>
 		<th>bool</th>
 		<th>If true, generate a new random seed. </th>
@@ -194,12 +200,6 @@
 		<th>int</th>
 		<th>The random seed. Ignored if generateRandomSeed == true. </th>
 		<th></th>
-	</tr>
-	<tr>
-		<th>adjustAudioSettings</th>
-		<th>bool</th>
-		<th>If true, adjust the global audio settings for better-quality audio. </th>
-		<th>true</th>
 	</tr>
 	<tr>
 		<th>generator</th>
@@ -315,7 +315,6 @@ public class Marbles : MonoBehaviour
         // Add the ClatterManager.
         GameObject go = new GameObject("ClatterManager");
         ClatterManager cm = go.AddComponent<ClatterManager>();
-        cm.auto = true;
         cm.OnAwake();
     }
 }</code></pre>

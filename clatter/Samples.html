@@ -143,8 +143,8 @@
 <p class="subtitle">class in Clatter.Core</p>
 
 <p>Cached audio data as an array of doubles that can be converted to an array of floats (for usage in Unity) or a byte array of int16 data (for .wav files).</p>
+<p>To avoid unnecessary memory allocations, the samples array is usually longer than the "actual" data size. Always use Samples.length instead of Samples.samples.Length to evaluate the size of the array.</p>
 
-<p><p>To avoid unnecessary memory allocations, the samples array is usually longer than the "actual" data size. Always use Samples.length instead of Samples.samples.Length to evaluate the size of the array.</p></p>
 <p>See: <a href="Impact.html"><code>Impact</code></a> and <a href="Scrape.html"><code>Scrape</code></a>, both of which have a samples field.</p><h2>Fields</h2>
 
 <table>
